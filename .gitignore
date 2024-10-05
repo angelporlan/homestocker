@@ -1,0 +1,17 @@
+# Global ignores
+.DS_Store
+Thumbs.db
+
+# Backend (Symfony) and frontend (Angular) specific gitignore rules
+/backend/vendor/
+/backend/var/
+/backend/public/uploads/
+/backend/.env
+/backend/.env.local
+/backend/.env.*.local
+/backend/node_modules/
+
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.angular/cache
+/frontend/.angular/compiler

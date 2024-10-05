@@ -1,0 +1,27 @@
+### Symfony ###
+# Symfony specific directories
+/var/cache/
+/var/log/
+/var/sessions/
+/public/uploads/
+/vendor/
+
+# Environment files
+/.env
+/.env.local
+/.env.*.local
+/.env.php
+/phpunit.xml
+/phpunit.xml.dist
+
+# Blackfire profiler
+.blackfire.yaml
+
+# Symfony Encore (Webpack)
+/node_modules/
+/public/build/
+
+# IDE and misc
+/.idea/
+/.vscode/
+/.DS_Store
