@@ -6,9 +6,6 @@
 parameters:
 
 services:
-    App\Security\JWTSuccessHandler:
-        arguments:
-            $jwtManager: '@lexik_jwt_authentication.jwt_manager' # Cambia a jwt_manager
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
