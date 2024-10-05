@@ -6,6 +6,9 @@
 parameters:
 
 services:
+    App\Security\JWTSuccessHandler:
+        arguments:
+            $jwtManager: '@lexik_jwt_authentication.jwt_manager' # Cambia a jwt_manager
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -19,10 +22,6 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-    
-    # App\Security\JWTSuccessHandler:
-    #     arguments:
-    #         $jwtManager: '@lexik_jwt_authentication.jwt.manager'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

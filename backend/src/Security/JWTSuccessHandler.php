@@ -7,12 +7,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
+use App\Entity\User;
 
 class JWTSuccessHandler implements AuthenticationSuccessHandlerInterface
 {
     private $jwtManager;
 
-    public function __construct(JWTTokenManagerInterface $jwtManager)
+    public function __construct(JWTTokenManagerInterface $jwtManager) // Asegúrate de que la importación sea correcta
     {
         $this->jwtManager = $jwtManager;
     }
@@ -20,6 +21,11 @@ class JWTSuccessHandler implements AuthenticationSuccessHandlerInterface
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): JsonResponse
     {
         $user = $token->getUser();
+
+        // Si el usuario no es una instancia de User, lanza una excepción
+        if (!$user instanceof User) {
+            throw new \LogicException('El usuario debe ser una instancia de User');
+        }
 
         // Crea el token
         $jwt = $this->jwtManager->create($user);
@@ -30,7 +36,7 @@ class JWTSuccessHandler implements AuthenticationSuccessHandlerInterface
             'iat' => time(),
             'exp' => time() + 3600, // 1 hora de expiración
             'roles' => $user->getRoles(),
-            'email' => 'calabaza', // Agrega el email del usuario
+            'email' => $user->getEmail(), // Agrega el email del usuario
             // Agrega aquí más información que desees
         ];
 
