@@ -62,7 +62,7 @@ class UserController extends AbstractController
         $houses = $user->getHouses()->map(function ($house) {
             return [
                 'id' => $house->getId(),
-                'nombre' => $house->getNombre()
+                'nombre' => $house->getName()
             ];
         })->toArray();
 
