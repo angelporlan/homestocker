@@ -140,4 +140,38 @@ class HouseController extends AbstractController
             'members' => array_map(fn($user) => $user->getUsername(), $house->getUsers()->toArray()), // Return usernames of members
         ]);
     }
+
+    // show products of house
+    #[Route('/houses/{id}/products', name: 'house_products', methods: ['GET'])]
+    public function getProducts(int $id): JsonResponse
+    {
+        $house = $this->entityManager->getRepository(House::class)->find($id);
+
+        if (!$house) {
+            return new JsonResponse(['error' => 'House not found'], JsonResponse::HTTP_NOT_FOUND);
+        }
+
+        // Obtener los productos de la casa
+        $products = $house->getProducts()->map(function ($product) {
+            return [
+                'id' => $product->getId(),
+                'name' => $product->getName(),
+                'category' => $product->getCategory(),
+                'total_quantity' => $product->getTotalQuantity(),
+                'photo' => $product->getPhoto(),
+                'expiration_details' => $product->getExpirationDates()->map(function ($detail) {
+                    return [
+                        'quantity' => $detail->getQuantity(),
+                        'expiration_date' => $detail->getExpirationDate()->format('Y-m-d')
+                    ];
+                })->toArray()
+            ];
+        })->toArray();
+
+        return new JsonResponse([
+            'house_id' => $house->getId(),
+            'house_name' => $house->getName(),
+            'products' => $products
+        ]);
+    }
 }
