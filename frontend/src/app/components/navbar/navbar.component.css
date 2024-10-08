@@ -1,0 +1,67 @@
+nav {
+    display: flex;
+    border-bottom: 2px solid #f1f1f1;
+    padding: 12px 48px;
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.logo {
+    width: 48px;
+    height: auto;
+    object-fit: contain;
+}
+
+.user-img {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.li-user {
+    display: flex;
+    align-items: center;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+}
+
+li {
+    margin: 0 10px 0 0;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        display: none;
+    }
+
+    .logo-title {
+        margin-right: 10px;
+    }
+
+    nav {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (min-width: 800px) {
+    .logo {
+        margin-right: 12px;
+    }
+
+    li {
+        margin: 0 24px 0 0;
+    }
+}
+
