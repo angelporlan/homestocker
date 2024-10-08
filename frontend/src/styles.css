@@ -1,3 +1,9 @@
+/* src/styles.css */
+:root {
+    --navbar-line-color: #f1f1f1;
+  }
+  
+
 * {
     margin: 0;
     padding: 0;

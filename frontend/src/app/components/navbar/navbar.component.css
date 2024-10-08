@@ -1,6 +1,6 @@
 nav {
     display: flex;
-    border-bottom: 2px solid #f1f1f1;
+    border-bottom: 2px solid var(--navbar-line-color);
     padding: 12px 48px;
 }
 
