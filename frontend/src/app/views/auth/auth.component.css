@@ -118,11 +118,16 @@ button {
     height: 100%;
     overflow: auto;
     background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4); 
+    background-color: rgba(0,0,0,0.4);
+}
+
+.hide {
+    transition: scale 0.3s ease, display 0.3s ease allow-discrete;
+    scale: 0;
 }
 
 .modal.show {
-    display: block; 
+    display: block;
 }
 
 .modal-content {
@@ -133,7 +138,14 @@ button {
     width: 80%; 
     border-radius: 12px;
     max-width: 628px;
-
+    
+    scale: 1;
+    transition: scale 0.3s ease-in-out; 
+    display: block;
+    
+    @starting-style {
+        scale: 0;
+    }
 }
 
 .modal-content h2 {
@@ -166,5 +178,10 @@ button {
     width: 100px;
     height: 100px;
     cursor: pointer;
-    border-radius: 50%;
+}
+
+@media (min-width: 400px) {
+    .box {
+        padding: 0 12px;
+    }
 }

@@ -29,8 +29,7 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal" [ngClass]="{'show': showModal}">
+<div class="modal" [ngClass]="{'show': showModal, 'hide': !showModal}">
     <div class="modal-content">
         <span class="close" (click)="closeModal()">&times;</span>
         <h2>Select Profile Image</h2>
