@@ -43,6 +43,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: House::class, inversedBy: 'users')]
     private Collection $houses;
 
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->houses = new ArrayCollection();
@@ -154,6 +157,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeHouse(House $house): static
     {
         $this->houses->removeElement($house);
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

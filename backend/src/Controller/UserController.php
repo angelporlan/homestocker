@@ -35,8 +35,14 @@ class UserController extends AbstractController
         $user->setEmail($data['email']);
         $hashedPassword = $passwordHasher->hashPassword($user, $data['password']);
         $user->setPassword($hashedPassword);
-        $user->setRoles($data['roles']);
 
+        // comprueba si el usuario tiene roles
+        if (isset($data['roles'])) {
+            $user->setRoles($data['roles']);
+        } else {
+            $user->setRoles(['ROLE_USER']);
+        }
+        $user->setImage($data['image']);
         // Guardar el usuario en la base de datos
         $this->entityManager->persist($user);
         $this->entityManager->flush();
@@ -45,6 +51,7 @@ class UserController extends AbstractController
             'id' => $user->getId(),
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
+            'image' => $user->getImage(),
             'roles' => $user->getRoles()
         ]);
     }
@@ -71,6 +78,7 @@ class UserController extends AbstractController
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
             'roles' => $user->getRoles(),
+            'image' => $user->getImage(),
             'houses' => $houses
         ]);
     }
