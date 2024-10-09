@@ -33,11 +33,32 @@ nav {
 ul {
     display: flex;
     list-style: none;
+    justify-content: center;
+    align-items: center;
 }
 
 li {
     margin: 0 10px 0 0;
     cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.start-now {
+    background-color: var(--blue-color);
+    padding: 8px 18px;
+    border-radius: 10px;
+}
+
+.start-now-a {
+    color: #fff;
+}
+
+.start-now:hover {
+    background-color: var(--blue-hover-color);
 }
 
 @media (max-width: 600px) {

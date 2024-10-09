@@ -41,13 +41,13 @@ li:hover {
 }
 
 .button-add-product {
-    background-color: #247efc;
+    background-color: var(--blue-color);
     color: white;
     margin-top: auto;
 }
 
 .button-add-product:hover {
-    background-color: #1c6fd9;
+    background-color: var(--blue-hover-color);
     color: white;
 }
 
