@@ -1,0 +1,170 @@
+.box {
+    max-width: 628px;
+    margin: 0 auto;
+}
+
+.logo-title {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px;
+    margin-top: 24px;
+    cursor: pointer;
+}
+
+.logo-title img {
+    width: 48px;
+    height: auto;
+    object-fit: contain;
+}
+
+.log-sing {
+    display: flex;
+    margin: 12px;
+}
+
+.log-sing p {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    cursor: pointer;
+    border-radius: 10px 10px 0 0;
+    color: var(--gray-hover-color);
+    border-bottom: 4px solid var(--gray-color);
+}
+
+.log-sing p:hover {
+    background-color: var(--gray-color);
+}
+
+.log-sing p.active {
+    color: var(--blue-color);
+    border-bottom: 4px solid var(--blue-color);
+}
+
+.log-sing p.active:hover {
+    background-color: var(--blue-ligth-color);
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 24px);
+    margin: 12px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border: 1px solid var(--gray-hover-color);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--blue-color);
+    color: #fff;
+    cursor: pointer;
+}
+
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-container input {
+    padding-left: 40px; 
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px; 
+    width: 20px;
+    height: 20px;
+}
+
+.input-container-img {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-img {
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%; 
+    cursor: pointer;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal.show {
+    display: block; 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    border-radius: 12px;
+    max-width: 628px;
+
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.image-grid img {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border-radius: 50%;
+}

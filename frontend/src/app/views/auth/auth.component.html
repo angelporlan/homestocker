@@ -1,0 +1,41 @@
+<div class="box">
+    <div class="logo-title" (click)="navigateTo('/')">
+        <img src="../../../assets/images/HomeStockerLogo.png" alt="png" class="logo">
+        <h1>HomeStocker</h1>
+    </div>
+
+    <div class="log-sing">
+        <p class="login" [ngClass]="{'active': loginActive}" (click)="toggleAuth(true)">Log in</p>
+        <p class="singup" [ngClass]="{'active': !loginActive}" (click)="toggleAuth(false)">Sign up</p>
+    </div>
+
+    <div class="inputs">
+        <div class="input-container-img" *ngIf="!loginActive">
+            <img [src]="profileImage || '../../../assets/profile/profile1.jpg'" alt="profile icon" class="profile-img" (click)="openModal()">
+        </div>
+        <div class="input-container" *ngIf="!loginActive">
+            <input type="text" placeholder="Username" [(ngModel)]="username">
+            <img src="../../../assets/icons/username.svg" alt="username icon" class="input-icon">
+        </div>
+        <div class="input-container">
+            <input type="text" placeholder="Email" [(ngModel)]="email">
+            <img src="../../../assets/icons/email.svg" alt="email icon" class="input-icon">
+        </div>
+        <div class="input-container">
+            <input type="password" placeholder="Password" [(ngModel)]="password">
+            <img src="../../../assets/icons/password.svg" alt="password icon" class="input-icon">
+        </div>
+        <button class="submit" (click)="login()">{{submitText}}</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" [ngClass]="{'show': showModal}">
+    <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2>Select Profile Image</h2>
+        <div class="image-grid">
+            <img *ngFor="let image of profileImages" [src]="image" (click)="selectImage(image)">
+        </div>
+    </div>
+</div>

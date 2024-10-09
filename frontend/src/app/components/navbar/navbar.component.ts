@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -13,13 +14,19 @@ export class NavbarComponent {
   
   currentUser: any;
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
-    const user = true;
+    const user = localStorage.getItem('currentUserHomeStocker');
     if (user) {
-      this.currentUser =true;
+      this.currentUser = JSON.parse(user);
       console.log(user);
     } else {
       console.log(user);
     }
+  }
+
+  navigateTo(path: string): void {
+    this.router.navigate([path]);
   }
 }

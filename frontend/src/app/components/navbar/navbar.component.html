@@ -8,7 +8,7 @@
             <li><a routerLink="/about">About</a></li>
             <li><a routerLink="/contact">Contact</a></li>
             <li *ngIf="currentUser"><a routerLink="/messages">Messages</a></li>
-            <li *ngIf="!currentUser" class="start-now"><a routerLink="/login" class="start-now-a">Start</a></li>
+            <li *ngIf="!currentUser" class="start-now" (click)="navigateTo('/login')"><a routerLink="/login" class="start-now-a">Start</a></li>
         </ul>
         <img src="../../../assets/icons/user.svg" alt="user" class="user-img" *ngIf="currentUser">
     </div>
