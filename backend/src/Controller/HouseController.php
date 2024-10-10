@@ -174,4 +174,69 @@ class HouseController extends AbstractController
             'products' => $products
         ]);
     }
+
+    // show users of house
+    #[Route('/houses/{id}/users', name: 'house_users', methods: ['GET'])] 
+    public function getUsers(int $id): JsonResponse
+    {
+        $house = $this->entityManager->getRepository(House::class)->find($id);
+
+        if (!$house) {
+            return new JsonResponse(['error' => 'House not found'], JsonResponse::HTTP_NOT_FOUND);
+        }
+
+        // Obtener los usuarios de la casa
+        $users = $house->getUsers()->map(function ($user) {
+            return [
+                'id' => $user->getId(),
+                'username' => $user->getUsername(),
+                'email' => $user->getEmail(),
+                'image' => $user->getImage(),
+                'roles' => $user->getRoles()
+            ];
+        })->toArray();
+
+        return new JsonResponse([
+            'users' => $users
+        ]);
+    }
+
+    // show number of user in house
+    #[Route('/houses/{id}/users/count', name: 'house_users_count', methods: ['GET'])]
+    public function getUsersCount(int $id): JsonResponse
+    {
+        $house = $this->entityManager->getRepository(House::class)->find($id);
+
+        if (!$house) {
+            return new JsonResponse(['error' => 'House not found'], JsonResponse::HTTP_NOT_FOUND);
+        }
+
+        // Obtener el número de usuarios en la casa
+        $userCount = $house->getUsers()->count();
+
+        return new JsonResponse([
+            'user_count' => $userCount
+        ]);
+    }
+
+    // show number of products in house (quantity)
+    #[Route('/houses/{id}/products/count', name: 'house_products_count', methods: ['GET'])]
+    public function getProductsCount(int $id): JsonResponse
+    {
+        $house = $this->entityManager->getRepository(House::class)->find($id);
+
+        if (!$house) {
+            return new JsonResponse(['error' => 'House not found'], JsonResponse::HTTP_NOT_FOUND);
+        }
+
+        // Obtener el número de cantidad de cada producto y sumarlo
+        $productCount = $house->getProducts()->reduce(function ($total, $product) {
+            return $total + $product->getTotalQuantity();
+        }, 0);
+
+        return new JsonResponse([
+            'product_count' => $productCount
+        ]);
+    }
+    
 }

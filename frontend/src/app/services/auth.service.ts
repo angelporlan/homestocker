@@ -30,4 +30,17 @@ export class AuthService {
   setUser(user: any): void {
     localStorage.setItem('currentUserHomeStocker', JSON.stringify(user));
   }
+
+  setToken(token: string): void {
+    localStorage.setItem('tokenHomeStocker', token);
+  }
+
+  getUser(): any {
+    const user = localStorage.getItem('currentUserHomeStocker');
+    return user ? JSON.parse(user) : null;
+  }
+
+  getToken(): any {
+    return localStorage.getItem('tokenHomeStocker');
+  }
 }

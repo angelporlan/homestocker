@@ -53,6 +53,7 @@ export class AuthComponent {
       (res: any) => {
         if (res.token) {
           console.log('Login successful: ');
+          this.authService.setToken(res.token);
           this.authService.userInfo(res.token).subscribe((user: any) => {
             console.log('User info: ', user);
             this.authService.setUser(user);
