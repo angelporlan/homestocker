@@ -25,7 +25,7 @@
             <input type="password" placeholder="Password" [(ngModel)]="password">
             <img src="../../../assets/icons/password.svg" alt="password icon" class="input-icon">
         </div>
-        <button class="submit" (click)="login()">{{submitText}}</button>
+        <button class="submit" (click)="loginActive ? login() : register()">{{submitText}}</button>
     </div>
 </div>
 
@@ -38,3 +38,5 @@
         </div>
     </div>
 </div>
+
+<app-loader *ngIf="isLoading"></app-loader>

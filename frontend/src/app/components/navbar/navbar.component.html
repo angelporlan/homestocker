@@ -10,6 +10,6 @@
             <li *ngIf="currentUser"><a routerLink="/messages">Messages</a></li>
             <li *ngIf="!currentUser" class="start-now" (click)="navigateTo('/login')"><a routerLink="/login" class="start-now-a">Start</a></li>
         </ul>
-        <img src="../../../assets/icons/user.svg" alt="user" class="user-img" *ngIf="currentUser">
+        <img [src]="userImage" alt="user" class="user-img" *ngIf="currentUser">
     </div>
 </nav>

@@ -29,6 +29,11 @@ class UserController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
+        $existingUser = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $data['email']]);
+        if ($existingUser) {
+            return new JsonResponse(['error' => 'Email already exists'], 409);
+        }
+
         // Crear el nuevo usuario
         $user = new User();
         $user->setUsername($data['username']);

@@ -19,8 +19,8 @@ nav {
 }
 
 .user-img {
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
     cursor: pointer;
     border-radius: 50%;
 }
@@ -49,8 +49,9 @@ a {
 
 .start-now {
     background-color: var(--blue-color);
-    padding: 8px 18px;
+    padding: 8px 24px;
     border-radius: 10px;
+    margin-left: 12px;
 }
 
 .start-now-a {

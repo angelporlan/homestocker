@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   
   currentUser: any;
+  userImage: string = '../../../assets/icons/user.svg';
 
   constructor(private router: Router) {}
 
@@ -20,6 +21,7 @@ export class NavbarComponent {
     const user = localStorage.getItem('currentUserHomeStocker');
     if (user) {
       this.currentUser = JSON.parse(user);
+      this.userImage = this.currentUser.image;
       console.log(user);
     } else {
       console.log(user);
