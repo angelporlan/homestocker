@@ -12,7 +12,6 @@ export class HouseService {
   constructor(private http: HttpClient) { }
 
   getNumberHouseProducts(houseId: number, token: string): Observable<any> {
-    // bearer token
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
@@ -20,10 +19,30 @@ export class HouseService {
   }
 
   getNumberHouseUsers(houseId: number, token: string): Observable<any> {
-    // bearer token
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
     return this.http.get(`${this.apiUrl}/houses/${houseId}/users/count`, { headers });
+  }
+
+  getHouseProducts(houseId: number, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.apiUrl}/houses/${houseId}/products`, { headers });
+  }
+
+  getHouseUsers(houseId: number, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.apiUrl}/houses/${houseId}/users`, { headers });
+  }
+
+  getHouse(houseId: number, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.apiUrl}/houses/${houseId}`, { headers });
   }
 }
