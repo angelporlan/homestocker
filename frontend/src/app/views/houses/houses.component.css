@@ -1,0 +1,32 @@
+@media (min-width: 800px) {
+    .h2-button {
+        margin: 24px 72px 0 72px;
+        display: flex;
+    }
+
+    button {
+        margin-left: 24px;
+        padding: 12px 24px;
+        border-radius: 10px;
+        border: none;
+        background-color: var(--blue-color);
+        color: #fff;
+        cursor: pointer;
+        margin-left: auto;
+    }
+
+    button:hover {
+        background-color: var(--blue-hover-color);
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    .houses {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 24px;
+        margin: 48px;
+    }
+}

@@ -1,4 +1,10 @@
 <app-navbar></app-navbar>
-<h2>Your houses</h2>
 
-<app-house-box *ngFor="let house of houses" [house]="house"></app-house-box>
+<div class="h2-button">
+<h2>Your houses</h2>
+<button class="add-house" (click)="addHouse()">Add house</button>
+</div>
+
+<div class="houses">
+    <app-house-box *ngFor="let house of houses" [house]="house"></app-house-box>
+</div>

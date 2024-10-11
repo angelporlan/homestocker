@@ -24,4 +24,8 @@ export class HomesComponent {
     console.log(this.houses);
   }
 
+  addHouse(): void {
+    console.log('house');
+  }
+
 }

@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { HouseService } from '../../services/house.service';
-import { AuthService } from '../../services/auth.service';
-import { forkJoin } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-house-box',
@@ -12,19 +10,10 @@ import { forkJoin } from 'rxjs';
 })
 export class HouseBoxComponent {
   @Input() house: any;
-  usersNumber: number = 0;
-  productsNumber: number = 0;
 
-  constructor(private houseService: HouseService, private authService: AuthService) {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    forkJoin({
-      usersNumber: this.houseService.getNumberHouseUsers(this.house.id, this.authService.getToken()),
-      productsNumber: this.houseService.getNumberHouseProducts(this.house.id, this.authService.getToken())
-    }).subscribe(({ usersNumber, productsNumber }) => {
-      this.usersNumber = usersNumber;
-      this.productsNumber = productsNumber;
-    });
+  navigateTo(path: string): void {
+    this.router.navigate([path]);
   }
-
 }

@@ -6,7 +6,7 @@ import { HomesComponent } from './views/houses/houses.component';
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent},
-    { path: 'dashboard', component: DashboardComponent},
+    { path: 'dashboard/:id', component: DashboardComponent},
     { path: 'login', component: AuthComponent},
     { path: 'houses', component: HomesComponent}
 ];
