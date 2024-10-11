@@ -2,7 +2,15 @@
 <div class="container">
     <app-sidebar class="sidebar"></app-sidebar>
     <div class="content">
-        <h2>casa 1</h2>
+        <div class="title-description">
+            <h2>{{houseDetails.name}}</h2>
+            <p>Usuarios actuales: {{houseUsers.length}} Alimentos activos: {{numberOfProducts}}</p>
+        </div>
+
+        <div class="users">
+            <h3>Users</h3>
+            <app-user-box *ngFor="let user of houseUsers" [user]="user"></app-user-box>
+        </div>
     </div>
 
 <app-loader *ngIf="loading"></app-loader>

@@ -7,11 +7,13 @@ import { ActivatedRoute } from '@angular/router';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { CommonModule } from '@angular/common';
 import { forkJoin } from 'rxjs';
+import { UserBoxComponent } from '../../components/dashboard/user-box/user-box.component';
+
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavbarComponent, SidebarComponent, LoaderComponent, CommonModule],
+  imports: [NavbarComponent, SidebarComponent, LoaderComponent, CommonModule, UserBoxComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -20,6 +22,7 @@ export class DashboardComponent {
   houseProducts: any[] = [];
   houseUsers: any[] = [];
   houseDetails: any = {};
+  numberOfProducts: number = 0;
 
   constructor(private houseService: HouseService, private authService: AuthService, private route: ActivatedRoute) {}
 
@@ -29,12 +32,22 @@ export class DashboardComponent {
     forkJoin({
       houseProducts: this.houseService.getHouseProducts(houseId, token),
       houseUsers: this.houseService.getHouseUsers(houseId, token),
-      houseDetails: this.houseService.getHouse(houseId, token)
+      houseDetails: this.houseService.getHouse(houseId, token),
     }).subscribe((response: any) => {
-      this.houseProducts = response.houseProducts;
-      this.houseUsers = response.houseUsers;
+      this.houseProducts = response.houseProducts.products;
+      this.houseUsers = response.houseUsers.users;
       this.houseDetails = response.houseDetails;
-      console.log(this.houseProducts, this.houseUsers, this.houseDetails);
+      
+      // Calculate the number of products in the house
+      this.houseProducts.forEach((product) => {
+        product.expiration_details.forEach((element: { quantity: number; }) => {
+            this.numberOfProducts += element.quantity;
+        });
+      })
+
+      console.log('houseProducts', this.houseProducts);
+      console.log('houseUsers', this.houseUsers);
+      console.log('houseDetails', this.houseDetails);
       this.loading = false;
     })
   }
