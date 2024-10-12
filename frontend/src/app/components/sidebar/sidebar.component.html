@@ -1,28 +1,28 @@
 <div class="box">
     <ul class="list-unstyled components">
-        <li class="active">
+        <li [ngClass]="{ 'active': isActive('home') }" (click)="navigateTo('home')">
             <img src="../../../assets/icons/home.svg" alt="svg">
-            <a routerLink="#">Home</a>
+            <span>Home</span>
         </li>
-        <li>
+        <li [ngClass]="{ 'active': isActive('products') }" (click)="navigateTo('products')">
             <img src="../../../assets/icons/products.svg" alt="svg">
-            <a routerLink="#">Products</a>
+            <span>Products</span>
         </li>
-        <li>
+        <li [ngClass]="{ 'active': isActive('users') }" (click)="navigateTo('users')">
             <img src="../../../assets/icons/users.svg" alt="svg">
-            <a routerLink="#">Users</a>
+            <span>Users</span>
         </li>
-        <li>
+        <li [ngClass]="{ 'active': isActive('notifications') }" (click)="navigateTo('notifications')">
             <img src="../../../assets/icons/notifications.svg" alt="svg">
-            <a routerLink="#">Notifications</a>
+            <span>Notifications</span>
         </li>
-        <li>
+        <li [ngClass]="{ 'active': isActive('settings') }" (click)="navigateTo('settings')">
             <img src="../../../assets/icons/settings.svg" alt="svg">
-            <a routerLink="#">Settings</a>
+            <span>Settings</span>
         </li>
-        <li class="button-add-product">
+        <li class="button-add-product" [ngClass]="{ 'active': isActive('add-product') }" (click)="navigateTo('add-product')">
             <img src="../../../assets/icons/plus.svg" alt="svg" class="plus-svg">
-            <a routerLink="#">Add Product</a>
+            <span>Add Product</span>
         </li>
     </ul>
 </div>
