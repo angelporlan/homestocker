@@ -24,16 +24,9 @@ export class SidebarComponent {
   }
   
   isActive(path: string): boolean {
-    // Obtener la URL actual
     const currentRoute = this.router.url;
-  
-    // Dividir la URL en segmentos
     const segments = currentRoute.split('/');
-  
-    // Recuperar el último segmento
-    const lastSegment = segments.pop() || ''; // Si el array está vacío, usa una cadena vacía
-  
-    // Comparar el último segmento con el argumento 'path'
+    const lastSegment = segments.pop() || ''; 
     return lastSegment === path;
   }
   

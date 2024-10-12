@@ -5,9 +5,8 @@ img {
 
 }
 
-a {
+span {
     display: none;
-    text-decoration: none;
 }
 
 .box {
@@ -53,7 +52,7 @@ li:hover {
 }
 
 @media (min-width: 800px) {
-    a {
+    span {
         display: block;
     }
 
