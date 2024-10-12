@@ -57,7 +57,7 @@ export class AuthComponent {
           this.authService.userInfo(res.token).subscribe((user: any) => {
             console.log('User info: ', user);
             this.authService.setUser(user);
-            this.navigateTo('/');
+            this.navigateTo('/houses');
           });
         } else {
           this.isLoading = false;
