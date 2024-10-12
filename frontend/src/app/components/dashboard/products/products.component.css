@@ -1,0 +1,74 @@
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-right: 24px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border: 1px solid var(--gray-hover-color);
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px; 
+    width: 20px;
+    height: 20px;
+}
+
+.input-container input {
+    padding-left: 40px; 
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+}
+
+.filter img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+
+.filter {
+    position: relative;
+    display: inline-block;
+    width: 190px;
+    margin-top: 12px;
+  }
+  
+  select {
+    appearance: none;
+    -webkit-appearance: none; /* Safari */
+    -moz-appearance: none; /* Firefox */
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%; /* O el tamaño que desees */
+  }
+
+  select:focus {
+    outline: none;
+  }
+  
+  .select-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Evita que el ícono interfiera con el select */
+    width: 20px;
+    height: 20px;
+  }
+  
+  
