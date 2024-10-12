@@ -2,16 +2,7 @@
 <div class="container">
     <app-sidebar class="sidebar"></app-sidebar>
     <div class="content">
-        <div class="title-description">
-            <h2>{{houseDetails.name}}</h2>
-            <p>Usuarios actuales: {{houseUsers.length}} Alimentos activos: {{numberOfProducts}}</p>
-        </div>
-
-        <div class="users">
-            <h3>Users</h3>
-            <app-user-box *ngFor="let user of houseUsers" [user]="user"></app-user-box>
-        </div>
+        <router-outlet></router-outlet>
     </div>
 
-<app-loader *ngIf="loading"></app-loader>
 </div>

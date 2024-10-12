@@ -3,17 +3,17 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { HouseService } from '../../services/house.service';
 import { AuthService } from '../../services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { CommonModule } from '@angular/common';
 import { forkJoin } from 'rxjs';
 import { UserBoxComponent } from '../../components/dashboard/user-box/user-box.component';
-
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavbarComponent, SidebarComponent, LoaderComponent, CommonModule, UserBoxComponent],
+  imports: [NavbarComponent, SidebarComponent, LoaderComponent, CommonModule, UserBoxComponent, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -24,7 +24,7 @@ export class DashboardComponent {
   houseDetails: any = {};
   numberOfProducts: number = 0;
 
-  constructor(private houseService: HouseService, private authService: AuthService, private route: ActivatedRoute) {}
+  constructor(private houseService: HouseService, private authService: AuthService, private route: ActivatedRoute, private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     const houseId = this.route.snapshot.params['id'];
@@ -44,6 +44,10 @@ export class DashboardComponent {
             this.numberOfProducts += element.quantity;
         });
       })
+
+      this.dashboardService.setHouseProducts(this.houseProducts);
+      this.dashboardService.setHouseUsers(this.houseUsers);
+      this.dashboardService.setHouseDetails(this.houseDetails);
 
       console.log('houseProducts', this.houseProducts);
       console.log('houseUsers', this.houseUsers);
