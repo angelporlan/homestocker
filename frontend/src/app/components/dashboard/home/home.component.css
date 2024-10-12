@@ -1,0 +1,8 @@
+.title-description p {
+    color: var(--gray-dark-color);
+    margin-top: 8px;
+}
+
+.users {
+    margin-top: 12px;
+}

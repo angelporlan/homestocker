@@ -7,7 +7,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { CommonModule } from '@angular/common';
 import { forkJoin } from 'rxjs';
-import { UserBoxComponent } from '../../components/dashboard/user-box/user-box.component';
+import { UserBoxComponent } from '../../components/dashboard/home/user-box/user-box.component';
 import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
@@ -48,6 +48,7 @@ export class DashboardComponent {
       this.dashboardService.setHouseProducts(this.houseProducts);
       this.dashboardService.setHouseUsers(this.houseUsers);
       this.dashboardService.setHouseDetails(this.houseDetails);
+      this.dashboardService.setNumberOfProducts(this.numberOfProducts);
 
       console.log('houseProducts', this.houseProducts);
       console.log('houseUsers', this.houseUsers);

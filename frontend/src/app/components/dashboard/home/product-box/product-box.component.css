@@ -1,11 +1,11 @@
-.box {
+.content {
     display: flex;
     align-items: center;
     margin: 12px 0;
     transition: .3s ease-in-out;
 }
 
-.box:hover {
+.content:hover {
     background-color: var(--gray-color);
     cursor: pointer;
     border-radius: 12px;
@@ -14,11 +14,11 @@
 img {
     width: 60px;
     height: 60px;
-    border-radius: 50%;
-    margin: 10px;
+    border-radius: 12px;
+    margin: 10px 10px 10px 0;
 }
 
-.user-info {
+.product-info {
     padding-right: 12px;
     display: flex;
     flex-direction: column;
@@ -26,6 +26,10 @@ img {
 }
 
 
-.username {
+.name {
     font-weight: 500;
+}
+
+.category {
+    font-size: 12px;
 }

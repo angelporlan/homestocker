@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../../services/dashboard.service';
-import { UserBoxComponent } from '../user-box/user-box.component';
+import { UserBoxComponent } from './user-box/user-box.component';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../../loader/loader.component';
+import { ProductBoxComponent } from './product-box/product-box.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [UserBoxComponent, CommonModule, LoaderComponent],
+  imports: [UserBoxComponent, CommonModule, LoaderComponent, ProductBoxComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
   houseProducts: any[] = [];
   houseUsers: any[] = [];
   houseDetails: any = {};
+  numberOfProducts: number = 0;
   isLoading: boolean = true; 
 
   constructor(private dashboardService: DashboardService) {}
@@ -54,6 +56,17 @@ export class HomeComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching house details', err);
+        this.isLoading = false;
+      }
+    });
+
+    this.dashboardService.getNumberOfProducts().subscribe({
+      next: (numberOfProducts) => {
+        this.numberOfProducts = numberOfProducts;
+        console.log('numberOfProducts', numberOfProducts);
+      },
+      error: (err) => {
+        console.error('Error fetching number of products', err);
         this.isLoading = false;
       }
     });

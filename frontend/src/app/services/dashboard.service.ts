@@ -8,6 +8,7 @@ export class DashboardService {
   private houseProductsSubject = new BehaviorSubject<any[]>([]);
   private houseUsersSubject = new BehaviorSubject<any[]>([]);
   private houseDetailsSubject = new BehaviorSubject<any>({});
+  private numberOfProductsSubject = new BehaviorSubject<number>(0);
 
   setHouseProducts(products: any[]): void {
     this.houseProductsSubject.next(products);
@@ -31,5 +32,13 @@ export class DashboardService {
 
   getHouseDetails() {
     return this.houseDetailsSubject.asObservable();
+  }
+
+  setNumberOfProducts(numberOfProducts: number): void {
+    this.numberOfProductsSubject.next(numberOfProducts);
+  }
+
+  getNumberOfProducts() {
+    return this.numberOfProductsSubject.asObservable();
   }
 }
