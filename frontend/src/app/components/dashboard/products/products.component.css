@@ -54,7 +54,7 @@ input {
     font-weight: 600;
     cursor: pointer;
     border-radius: 4px;
-    width: 100%; /* O el tamaño que desees */
+    width: 100%; 
   }
 
   select:focus {
@@ -63,12 +63,24 @@ input {
   
   .select-icon {
     position: absolute;
-    right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    pointer-events: none; /* Evita que el ícono interfiera con el select */
+    pointer-events: none; 
     width: 20px;
     height: 20px;
+    right: 60px;
+  }
+
+  .soon {
+    right: 60px;
+  }
+
+  .last {
+    right: 68px;
+  }
+
+  .alphabetical {
+    left: 158px;
   }
   
   

@@ -4,10 +4,11 @@
 </div>
 
 <div class="filter">
-    <select>
+    <select [(ngModel)]="selectedOption" (change)="onSelectChange()">
         <option value="soon">Expired soon</option>
         <option value="alphabetical">Alphabetical order</option>
         <option value="last">Expired last</option>
     </select>
-    <img src="../../../../assets/icons/filter.svg" alt="filter" class="select-icon">
+    <img src="../../../../assets/icons/filter.svg" alt="filter" class="select-icon" 
+    [ngClass]="{'alphabetical': selectedClass == 'alphabetical', 'soon': selectedClass == 'soon', 'last': selectedClass == 'last'}">
 </div>
