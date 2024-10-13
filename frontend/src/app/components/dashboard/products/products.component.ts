@@ -20,6 +20,7 @@ export class ProductsComponent {
   filteredProducts: any[] = [];
   numberOfProducts: number = 0;
   isLoading: boolean = true;
+  searchOption: string = '';
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -33,9 +34,7 @@ export class ProductsComponent {
     ).subscribe({
       next: (products) => {
         this.houseProducts = products;
-        this.filteredProducts = this.houseProducts.slice().sort((a, b) => 
-          this.getClosestExpirationDate(a).getTime() - this.getClosestExpirationDate(b).getTime()
-        );
+        this.applyFilters();
       },
       error: (err) => {
         console.error('Error fetching house products', err);
@@ -43,7 +42,6 @@ export class ProductsComponent {
       },
     });
 
-    //comprobar si se completa la carga, cuando añada ngrx store lo cambiaré 
     this.dashboardService.getHouseDetails().subscribe({
       next: (details) => {
         if (details.name) {
@@ -59,7 +57,7 @@ export class ProductsComponent {
 
   getClosestExpirationDate(product: any): Date {
     if (!product.expiration_details || product.expiration_details.length === 0) {
-      return new Date(0); 
+      return new Date(0);
     }
 
     const closestExpirationDetail = product.expiration_details.reduce(
@@ -73,20 +71,35 @@ export class ProductsComponent {
     return new Date(closestExpirationDetail.expiration_date);
   }
 
-  onSelectChange() {
+  applyFilters() {
+    let filtered = this.houseProducts.filter((product) => 
+      product.name.toLowerCase().includes(this.searchOption.toLowerCase())
+    );
+
     if (this.selectedOption === 'alphabetical') {
       this.selectedClass = 'alphabetical';
-      this.filteredProducts = this.houseProducts.slice().sort((a, b) => a.name.localeCompare(b.name));
+      filtered = filtered.sort((a, b) => a.name.localeCompare(b.name));
     } else if (this.selectedOption === 'last') {
       this.selectedClass = 'last';
-      this.filteredProducts = this.houseProducts.slice().sort((a, b) => 
+      filtered = filtered.sort((a, b) => 
         this.getClosestExpirationDate(b).getTime() - this.getClosestExpirationDate(a).getTime()
       );
     } else {
       this.selectedClass = 'soon';
-      this.filteredProducts = this.houseProducts.slice().sort((a, b) => 
+      filtered = filtered.sort((a, b) => 
         this.getClosestExpirationDate(a).getTime() - this.getClosestExpirationDate(b).getTime()
       );
     }
+
+    this.filteredProducts = filtered;
+  }
+
+  onSelectChange() {
+    this.applyFilters();
+  }
+
+  onSearchChange(event: Event) {
+    this.searchOption = (event.target as HTMLInputElement).value;
+    this.applyFilters();
   }
 }

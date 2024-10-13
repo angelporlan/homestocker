@@ -83,4 +83,9 @@ input {
     left: 158px;
   }
   
+  .no-products-info {
+    margin-top: 12px;
+    height: 100%;
+    font-weight: 400;
+  }
   

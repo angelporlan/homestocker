@@ -1,21 +1,24 @@
 <h2>Products</h2>
 <div class="input-container">
-    <input type="text" placeholder="Search for Products" class="">
+    <input type="text" placeholder="Search for Products" [(ngModel)]="searchOption" (input)="onSearchChange($event)">
     <img src="../../../../assets/icons/magnifying-glass.svg" alt="search icon" class="input-icon">
 </div>
 
-<div class="filter">
-    <select [(ngModel)]="selectedOption" (change)="onSelectChange()">
-        <option value="soon">Expired soon</option>
-        <option value="alphabetical">Alphabetical order</option>
-        <option value="last">Expired last</option>
-    </select>
-    <img src="../../../../assets/icons/filter.svg" alt="filter" class="select-icon" 
-    [ngClass]="{'alphabetical': selectedClass == 'alphabetical', 'soon': selectedClass == 'soon', 'last': selectedClass == 'last'}">
-</div>
-
-<div class="products">
-    <app-product-box *ngFor="let product of filteredProducts" [product]="product"></app-product-box>
+<div *ngIf="!isLoading">
+    <div class="filter">
+        <select [(ngModel)]="selectedOption" (change)="onSelectChange()">
+            <option value="soon">Expired soon</option>
+            <option value="alphabetical">Alphabetical order</option>
+            <option value="last">Expired last</option>
+        </select>
+        <img src="../../../../assets/icons/filter.svg" alt="filter" class="select-icon" 
+        [ngClass]="{'alphabetical': selectedClass == 'alphabetical', 'soon': selectedClass == 'soon', 'last': selectedClass == 'last'}">
+    </div>
+    
+    <div class="products">
+        <app-product-box *ngFor="let product of filteredProducts" [product]="product"></app-product-box>
+        <p *ngIf="filteredProducts.length < 1" class="no-products-info">No products found</p>
+    </div>
 </div>
 
 <app-loader *ngIf="isLoading"></app-loader>
