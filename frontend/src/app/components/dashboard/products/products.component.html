@@ -14,7 +14,7 @@
 </div>
 
 <div class="products">
-    <app-product-box *ngFor="let product of houseProducts" [product]="product"></app-product-box>
+    <app-product-box *ngFor="let product of filteredProducts" [product]="product"></app-product-box>
 </div>
 
 <app-loader *ngIf="isLoading"></app-loader>
