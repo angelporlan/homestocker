@@ -22,7 +22,6 @@ export class DashboardComponent {
   houseProducts: any[] = [];
   houseUsers: any[] = [];
   houseDetails: any = {};
-  numberOfProducts: number = 0;
 
   constructor(private houseService: HouseService, private authService: AuthService, private route: ActivatedRoute, private dashboardService: DashboardService) {}
 
@@ -38,21 +37,9 @@ export class DashboardComponent {
       this.houseUsers = response.houseUsers.users;
       this.houseDetails = response.houseDetails;
       
-      // Calculate the number of products in the house
-      this.houseProducts.forEach((product) => {
-        product.expiration_details.forEach((element: { quantity: number; }) => {
-            this.numberOfProducts += element.quantity;
-        });
-      })
-
       this.dashboardService.setHouseProducts(this.houseProducts);
       this.dashboardService.setHouseUsers(this.houseUsers);
       this.dashboardService.setHouseDetails(this.houseDetails);
-      this.dashboardService.setNumberOfProducts(this.numberOfProducts);
-
-      console.log('houseProducts', this.houseProducts);
-      console.log('houseUsers', this.houseUsers);
-      console.log('houseDetails', this.houseDetails);
       this.loading = false;
     })
   }

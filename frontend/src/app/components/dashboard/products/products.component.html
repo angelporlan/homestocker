@@ -12,3 +12,9 @@
     <img src="../../../../assets/icons/filter.svg" alt="filter" class="select-icon" 
     [ngClass]="{'alphabetical': selectedClass == 'alphabetical', 'soon': selectedClass == 'soon', 'last': selectedClass == 'last'}">
 </div>
+
+<div class="products">
+    <app-product-box *ngFor="let product of houseProducts" [product]="product"></app-product-box>
+</div>
+
+<app-loader *ngIf="isLoading"></app-loader>

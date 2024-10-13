@@ -27,7 +27,11 @@ export class HomeComponent implements OnInit {
     this.dashboardService.getHouseProducts().subscribe({
       next: (products) => {
         this.houseProducts = products;
-        console.log('houseProducts', this.houseProducts);
+
+        this.houseProducts.forEach((product) => {
+          this.numberOfProducts += product.total_quantity;
+        });
+
         this.checkIfLoadingComplete();
       },
       error: (err) => {
@@ -60,20 +64,10 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    this.dashboardService.getNumberOfProducts().subscribe({
-      next: (numberOfProducts) => {
-        this.numberOfProducts = numberOfProducts;
-        console.log('numberOfProducts', numberOfProducts);
-      },
-      error: (err) => {
-        console.error('Error fetching number of products', err);
-        this.isLoading = false;
-      }
-    });
   }
 
   checkIfLoadingComplete(): void {
-    if (this.houseProducts.length > 0 && this.houseUsers.length > 0 && Object.keys(this.houseDetails).length > 0) {
+    if (this.houseUsers.length > 0 ) {
       this.isLoading = false;
     }
   }
