@@ -63,7 +63,7 @@ class ProductController extends AbstractController
             'category' => $product->getCategory(),
             'total_quantity' => $product->getTotalQuantity(),
             'photo' => $product->getPhoto(),
-            'expiration_dates' => $product->getExpirationDates()->map(fn($detail) => [
+            'expiration_details' => $product->getExpirationDates()->map(fn($detail) => [
                 'quantity' => $detail->getQuantity(),
                 'expiration_date' => $detail->getExpirationDate()->format('d-m-Y')
             ])->toArray()

@@ -15,7 +15,7 @@
     
     <div class="expiration-dates">
         <h2>Expiration Dates</h2>
-        <div class="expiration-date" *ngFor="let date of product.expiration_dates">
+        <div class="expiration-date" *ngFor="let date of product.expiration_details">
             <app-product-detail [productDetail]="date"></app-product-detail>
         </div>
     </div>
