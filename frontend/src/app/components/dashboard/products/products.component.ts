@@ -22,7 +22,7 @@ export class ProductsComponent {
   isLoading: boolean = true;
   searchOption: string = '';
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -60,19 +60,25 @@ export class ProductsComponent {
       return new Date(0);
     }
 
+    const parseDate = (dateString: string): Date => {
+      const [day, month, year] = dateString.split('-').map((part: string) => parseInt(part, 10));
+      return new Date(year, month - 1, day);
+    };
+
     const closestExpirationDetail = product.expiration_details.reduce(
       (closest: any, current: any) => {
-        const closestDate = new Date(closest.expiration_date);
-        const currentDate = new Date(current.expiration_date);
+        const closestDate = parseDate(closest.expiration_date);
+        const currentDate = parseDate(current.expiration_date);
         return currentDate < closestDate ? current : closest;
       }
     );
 
-    return new Date(closestExpirationDetail.expiration_date);
+    return parseDate(closestExpirationDetail.expiration_date);
   }
 
+
   applyFilters() {
-    let filtered = this.houseProducts.filter((product) => 
+    let filtered = this.houseProducts.filter((product) =>
       product.name.toLowerCase().includes(this.searchOption.toLowerCase())
     );
 
@@ -81,12 +87,12 @@ export class ProductsComponent {
       filtered = filtered.sort((a, b) => a.name.localeCompare(b.name));
     } else if (this.selectedOption === 'last') {
       this.selectedClass = 'last';
-      filtered = filtered.sort((a, b) => 
+      filtered = filtered.sort((a, b) =>
         this.getClosestExpirationDate(b).getTime() - this.getClosestExpirationDate(a).getTime()
       );
     } else {
       this.selectedClass = 'soon';
-      filtered = filtered.sort((a, b) => 
+      filtered = filtered.sort((a, b) =>
         this.getClosestExpirationDate(a).getTime() - this.getClosestExpirationDate(b).getTime()
       );
     }
