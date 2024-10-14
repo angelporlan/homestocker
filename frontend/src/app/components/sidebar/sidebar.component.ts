@@ -12,23 +12,22 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 export class SidebarComponent {
   currtentRoute: string = '';
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   navigateTo(path: string): void {
-    let currentRoute = this.router.url;
-    let segments = currentRoute.split('/');
-    segments.pop();
-    segments.push(path);
-    const newRoute = segments.join('/');
+    const currentRoute = this.router.url;
+    const segments = currentRoute.split('/');
+    const dashboardIndex = segments.indexOf('dashboard');
+    const id = segments[dashboardIndex + 1];
+    const newRoute = `dashboard/${id}/${path}`;
     this.router.navigate([newRoute]);
   }
-  
+
   isActive(path: string): boolean {
     const currentRoute = this.router.url;
     const segments = currentRoute.split('/');
-    const lastSegment = segments.pop() || ''; 
-    return lastSegment === path;
+    return segments.includes(path);
   }
-  
+
 
 }

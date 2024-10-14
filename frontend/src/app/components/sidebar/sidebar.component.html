@@ -4,7 +4,7 @@
             <img src="../../../assets/icons/home.svg" alt="svg">
             <span>Home</span>
         </li>
-        <li [ngClass]="{ 'active': isActive('products') }" (click)="navigateTo('products')">
+        <li [ngClass]="{ 'active': isActive('products') || isActive('product') }" (click)="navigateTo('products')">
             <img src="../../../assets/icons/products.svg" alt="svg">
             <span>Products</span>
         </li>
