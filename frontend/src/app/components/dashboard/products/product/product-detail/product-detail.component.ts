@@ -77,7 +77,7 @@ export class ProductDetailComponent {
             this.productDetailChange.emit(response);
         },
         (error: any) => {
-          console.error('Error adding detail product');
+          console.error('error: ' + JSON.stringify(error));
         }
       );
     } else {
@@ -92,12 +92,12 @@ export class ProductDetailComponent {
             this.productDetailChange.emit(response);
         },
         (error: any) => {
-          console.error('Error removing detail product');
+          console.error('error: ' + JSON.stringify(error));
         }
       );
     } else {
       console.error('Product ID is undefined');
     }
   }
-  
+
 }

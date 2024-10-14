@@ -162,7 +162,7 @@ class HouseController extends AbstractController
                 'expiration_details' => $product->getExpirationDates()->map(function ($detail) {
                     return [
                         'quantity' => $detail->getQuantity(),
-                        'expiration_date' => $detail->getExpirationDate()->format('Y-m-d')
+                        'expiration_date' => $detail->getExpirationDate()->format('d-m-Y')
                     ];
                 })->toArray()
             ];
