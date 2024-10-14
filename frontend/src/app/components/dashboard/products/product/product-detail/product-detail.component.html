@@ -4,7 +4,7 @@
         <p class="quantity">{{productDetail.quantity}} items</p>
     </div>
     <div class="svgs">
-        <img src="../../../../../assets/icons/show-more.svg" alt="more">
-        <img src="../../../../../assets/icons/show-less.svg" alt="less">
+        <img src="../../../../../assets/icons/show-more.svg" alt="more" (click)="addOneQuantity()">
+        <img src="../../../../../assets/icons/show-less.svg" alt="less" (click)="quitOneQuantity()">
     </div>
 </article>

@@ -33,4 +33,12 @@ export class DashboardService {
     return this.houseDetailsSubject.asObservable();
   }
 
+  //actualizar el producto por id
+  updateProductById(productId: number, product: any) {
+    const products = this.houseProductsSubject.getValue();
+    const index = products.findIndex((p: any) => p.id === productId);
+    products[index] = product;
+    this.setHouseProducts(products);
+  }
+
 }

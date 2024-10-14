@@ -18,4 +18,28 @@ export class ProductService {
     });
     return this.http.get(`${this.apiUrl}/products/${productId}`, { headers });
   }
+
+  addDetailProduct(productId: number, quantity: number, expiration_date: string): any {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    const body = {
+      quantity,
+      expiration_date
+    };
+    return this.http.post(`${this.apiUrl}/products/${productId}/details`, body ,{ headers });
+  }
+
+  removeDetailProduct(productId: number, quantity: number, expiration_date: string): any {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    const body = {
+      quantity,
+      expiration_date
+    };
+    return this.http.post(`${this.apiUrl}/products/${productId}/details/remove`, body ,{ headers });
+  }
 }

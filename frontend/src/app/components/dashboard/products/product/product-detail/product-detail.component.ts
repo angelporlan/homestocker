@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ProductService } from '../../../../../services/product.service';
+import { DashboardService } from '../../../../../services/dashboard.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -9,8 +11,10 @@ import { Component, Input } from '@angular/core';
 })
 export class ProductDetailComponent {
   @Input() productDetail: any;
+  @Input() productId: number | undefined;
+  @Output() productDetailChange = new EventEmitter<any>();
 
-
+  constructor(private productService: ProductService, private dashboardService: DashboardService) { }
 
   formatDate(date: string | null | undefined): string {
     if (!date) {
@@ -63,6 +67,36 @@ export class ProductDetailComponent {
         return 'Dec';
       default:
         return 'Invalid month';
+    }
+  }
+
+  addOneQuantity(): void {
+    if (this.productId !== undefined) {
+      this.productService.addDetailProduct(this.productId, 1, this.productDetail.expiration_date).subscribe(
+        (response: any) => {
+            this.productDetailChange.emit(response);
+        },
+        (error: any) => {
+          console.error('Error adding detail product');
+        }
+      );
+    } else {
+      console.error('Product ID is undefined');
+    }
+  }
+
+  quitOneQuantity(): void {
+    if (this.productId !== undefined) {
+      this.productService.removeDetailProduct(this.productId, 1, this.productDetail.expiration_date).subscribe(
+        (response: any) => {
+            this.productDetailChange.emit(response);
+        },
+        (error: any) => {
+          console.error('Error removing detail product');
+        }
+      );
+    } else {
+      console.error('Product ID is undefined');
     }
   }
   

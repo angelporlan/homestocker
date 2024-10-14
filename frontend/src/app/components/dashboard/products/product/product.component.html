@@ -14,12 +14,32 @@
     <div class="quantity">{{product.total_quantity}} items</div>
     
     <div class="expiration-dates">
-        <h2>Expiration Dates</h2>
+        <div class="title-button">
+            <h2>Expiration Dates</h2>
+            <button (click)="showModal=true">Add</button>
+        </div>
         <div class="expiration-date" *ngFor="let date of product.expiration_details">
-            <app-product-detail [productDetail]="date"></app-product-detail>
+            <app-product-detail [productDetail]="date" [productId]="product.id" (productDetailChange)="onProductUpdated($event)"></app-product-detail>
         </div>
     </div>
 
+</div>
+
+<!-- Modal -->
+<div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+        <span class="close" (click)="showModal=false">&times;</span>
+        <h2>Add Expiration Date</h2>
+        <form (ngSubmit)="submitForm()">
+            <label for="expirationDate">Expiration Date:</label>
+            <input type="date" id="expirationDate" [(ngModel)]="newExpirationDate" name="expirationDate" required>
+            
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" [(ngModel)]="newQuantity" name="quantity" required>
+            
+            <button type="submit">Add</button>
+        </form>
+    </div>
 </div>
 
 <app-loader *ngIf="isLoading"></app-loader>
