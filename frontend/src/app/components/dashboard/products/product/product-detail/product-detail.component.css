@@ -1,0 +1,39 @@
+article {
+    display: flex;
+    border: 1px solid var(--gray-dark-color);
+    border-radius: 8px;
+    margin-top: 12px;
+    padding: 12px;
+    align-items: center;
+}
+
+.date-quantity {
+    display: flex;
+    width: 100%;
+}
+
+.quantity {
+    margin-left: auto;
+}
+
+.svgs {
+    display: flex;
+    margin-left: 12px;
+}
+
+.svgs img {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+@media (max-width: 400px) {
+    .date-quantity {
+        flex-direction: column;
+    }
+
+    .quantity {
+        margin-left: 0;
+    }
+}

@@ -1,1 +1,25 @@
-<p>product works!</p>
+<div class="content" *ngIf="!isLoading">
+    <h2>Product Details</h2>
+    
+    <div class="product">
+        <img src="../../../../../assets/images/product1.jpg" alt="product">
+        <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.category }}</p>
+            <button (click)="onEdit()" class="edit">Edit</button>
+            <button (click)="onDelete()" class="delete">Delete</button>
+        </div>
+    </div>
+    
+    <div class="quantity">{{product.total_quantity}} items</div>
+    
+    <div class="expiration-dates">
+        <h2>Expiration Dates</h2>
+        <div class="expiration-date" *ngFor="let date of product.expiration_dates">
+            <app-product-detail [productDetail]="date"></app-product-detail>
+        </div>
+    </div>
+
+</div>
+
+<app-loader *ngIf="isLoading"></app-loader>
