@@ -5,12 +5,14 @@
 
 <div class="users">
     <h3>Users</h3>
-    <app-user-box *ngFor="let user of houseUsers" [user]="user"></app-user-box>
+    <app-user-box *ngFor="let user of twoHouseUsers" [user]="user"></app-user-box>
+    <p class="show-more" *ngIf="isTwoHouseUsersVisible" (click)="navigateTo('users')">Show more users</p>
 </div>
 
 <div class="products">
     <h3>Products</h3>
-    <app-product-box *ngFor="let product of houseProducts" [product]="product"></app-product-box>
+    <app-product-box *ngFor="let product of twoHouseProducts" [product]="product"></app-product-box>
+    <p class="show-more" *ngIf="isTwoHouseProductsVisible" (click)="navigateTo('products')">Show more products</p>
 </div>
 
 <app-loader *ngIf="isLoading"></app-loader>

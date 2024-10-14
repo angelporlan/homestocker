@@ -4,5 +4,16 @@
 }
 
 .users {
-    margin-top: 12px;
+    margin: 12px 0;
+}
+
+.show-more {
+    margin-top: 8px;
+    color: var(--blue-color);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.show-more:hover {
+    text-decoration: underline;
 }
