@@ -18,6 +18,15 @@
             <h2>Expiration Dates</h2>
             <button (click)="showModal=true">Add</button>
         </div>
+        <div class="filter">
+            <select [(ngModel)]="selectedOption" (change)="onSelectChange()">
+                <option value="soon">Expired soon</option>
+                <option value="quantity">Quantity</option>
+                <option value="last">Expired last</option>
+            </select>
+            <img src="../../../../assets/icons/filter.svg" alt="filter" class="select-icon" 
+            [ngClass]="{'soon': selectedClass == 'soon', 'last': selectedClass == 'last', 'quantity-filter': selectedClass =='quantity'}">
+        </div>
         <div class="expiration-date" *ngFor="let date of product.expiration_details">
             <app-product-detail [productDetail]="date" [productId]="product.id" (productDetailChange)="onProductUpdated($event)"></app-product-detail>
         </div>

@@ -55,6 +55,11 @@ export class ProductBoxComponent {
     if (result < 0) {
       return `Expired ${Math.abs(result)} days ago`;
     }
+
+    if (result === 0) {
+      return 'Expires today';
+    }
+
     return `${result} days until expiration`;
 
   }
