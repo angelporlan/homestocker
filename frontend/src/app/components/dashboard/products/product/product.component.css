@@ -197,6 +197,17 @@ form button[type="submit"]:hover {
     background-color: var(--blue-hover-color);
 }
 
+.delete-button {
+    margin-top: 10px;
+    background-color: var(--red-ligth-color);
+    color: black;
+    border: none;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 
 
 

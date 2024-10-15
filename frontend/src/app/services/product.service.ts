@@ -19,6 +19,14 @@ export class ProductService {
     return this.http.get(`${this.apiUrl}/products/${productId}`, { headers });
   }
 
+  deleteProduct(productId: number): any {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete(`${this.apiUrl}/products/${productId}`, { headers });
+  }
+
   addDetailProduct(productId: number, quantity: number, expiration_date: string): any {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({

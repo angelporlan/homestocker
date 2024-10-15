@@ -7,7 +7,7 @@
             <h3>{{ product.name }}</h3>
             <p>{{ product.category }}</p>
             <button (click)="onEdit()" class="edit">Edit</button>
-            <button (click)="onDelete()" class="delete">Delete</button>
+            <button (click)="showDeleteModal=true" class="delete">Delete</button>
         </div>
     </div>
     
@@ -34,7 +34,7 @@
 
 </div>
 
-<!-- Modal -->
+<!-- Modal add detail product -->
 <div class="modal" *ngIf="showModal">
     <div class="modal-content">
         <span class="close" (click)="showModal=false">&times;</span>
@@ -48,6 +48,16 @@
             
             <button type="submit">Add</button>
         </form>
+    </div>
+</div>
+
+<!-- modal delete product -->
+<div class="modal" *ngIf="showDeleteModal">
+    <div class="modal-content">
+        <span class="close" (click)="showDeleteModal=false">&times;</span>
+        <h2>Delete Product</h2>
+        <p>Are you sure you want to delete this product?</p>
+        <button (click)="onDeleteProduct()" class="delete-button">Delete</button>
     </div>
 </div>
 

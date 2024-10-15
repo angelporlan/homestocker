@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../../../services/product.service';
 import { DashboardService } from '../../../../services/dashboard.service';
 import { LoaderComponent } from '../../../loader/loader.component';
@@ -24,11 +24,12 @@ export class ProductComponent {
   showModal: boolean = false;
   newQuantity: number = 0;
   newExpirationDate: string = '';
+  showDeleteModal: boolean = false;
 
   selectedClass: string = '';
   selectedOption: string = 'soon';
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private dashboardService: DashboardService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, private dashboardService: DashboardService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -54,7 +55,6 @@ export class ProductComponent {
             next: (product: any) => {
               this.product = product;
               this.isLoading = false;
-              console.log('Product', this.product);
               this.product.expiration_details = this.sortDatesAsc(this.product.expiration_details);
             },
             error: (err: any) => {
@@ -71,8 +71,25 @@ export class ProductComponent {
     console.log('Edit product');
   }
 
-  onDelete(): void {
-    console.log('Delete product');
+  onDeleteProduct(): void {
+    this.productService.deleteProduct(this.product.id).subscribe(
+      () => {
+        this.dashboardService.deleteProductById(this.product.id);
+    
+        const currentRoute = this.router.url; 
+    
+        const segments = currentRoute.split('/');
+        const houseId = segments[2]; 
+    
+        const newRoute = `/dashboard/${houseId}/products`;
+    
+        this.router.navigate([newRoute]);
+      },
+      (error: any) => {
+        console.error('Error deleting product', error);
+      }
+    );
+    
   }
 
   onAdd(): void {
@@ -97,7 +114,6 @@ export class ProductComponent {
       const formattedDate = this.formatDate(this.newExpirationDate);
       this.productService.addDetailProduct(this.product.id, this.newQuantity, formattedDate).subscribe(
         (response: any) => {
-          console.log('Detail product added', JSON.stringify(response));
           this.showModal=false;
           this.onProductUpdated(response);
         },
