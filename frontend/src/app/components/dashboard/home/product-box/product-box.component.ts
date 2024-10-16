@@ -76,4 +76,10 @@ export class ProductBoxComponent {
     this.router.navigate([newRoute]);
   }
 
+
+  // desarrollo, en produccion borrar
+  getProductImageUrl(): string {
+    const backendUrl = 'http://localhost:8000'; // URL del backend
+    return this.product.photo ? `${backendUrl}${this.product.photo}` : '../../../../../assets/images/product1.jpg';
+  }
 }

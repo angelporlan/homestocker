@@ -1,91 +1,98 @@
 .input-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-right: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-right: 24px;
 }
 
 input {
-    width: 100%;
-    padding: 12px;
-    margin: 12px 0;
-    border-radius: 10px;
-    border: 1px solid var(--gray-hover-color);
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 10px;
+  border: 1px solid var(--gray-hover-color);
 }
 
 .input-icon {
-    position: absolute;
-    left: 10px; 
-    width: 20px;
-    height: 20px;
+  position: absolute;
+  left: 10px;
+  width: 20px;
+  height: 20px;
 }
 
 .input-container input {
-    padding-left: 40px; 
+  padding-left: 40px;
 }
 
 .filter {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .filter img {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 
 .filter {
-    position: relative;
-    display: inline-block;
-    width: 190px;
-    margin-top: 12px;
-  }
-  
-  select {
-    appearance: none;
-    -webkit-appearance: none; /* Safari */
-    -moz-appearance: none; /* Firefox */
-    background: none;
-    border: none;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 4px;
-    width: 100%; 
-  }
+  position: relative;
+  display: inline-block;
+  width: 190px;
+  margin-top: 12px;
+}
 
-  select:focus {
-    outline: none;
-  }
-  
-  .select-icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none; 
-    width: 20px;
-    height: 20px;
-    right: 60px;
-  }
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  /* Safari */
+  -moz-appearance: none;
+  /* Firefox */
+  background: none;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 100%;
+}
 
-  .soon {
-    right: 60px;
-  }
+select:focus {
+  outline: none;
+}
 
-  .last {
-    right: 68px;
-  }
+.select-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 20px;
+  height: 20px;
+  right: 60px;
+}
 
-  .alphabetical {
-    left: 158px;
-  }
-  
-  .no-products-info {
-    margin-top: 12px;
-    height: 100%;
-    font-weight: 400;
-  }
-  
+.soon {
+  right: 60px;
+}
+
+.last {
+  right: 68px;
+}
+
+.alphabetical {
+  left: 158px;
+}
+
+.no-products-info {
+  margin-top: 12px;
+  height: 100%;
+  font-weight: 400;
+}
+
+.products {
+  overflow-y: auto;
+  margin-top: 4px;
+  max-height: calc(100vh - 240px);
+}

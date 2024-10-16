@@ -1,8 +1,8 @@
 <div class="content" (click)="navigateTo('product/' + product.id)">
-    <img src="../../../../../assets/images/product1.jpg" alt="product">
+    <img [src]="getProductImageUrl()" alt="product">
     <div class="product-info">
         <p class="name">{{product.name}} - {{product.total_quantity}} units</p>
-        <p class="expiration">{{this.getDaysUntilExpiration(product)}}</p>
+        <p class="expiration">{{getDaysUntilExpiration(product)}}</p>
         <p class="category">{{product.category}}</p>
     </div>
 </div>

@@ -21,6 +21,7 @@ export class ProductsComponent {
   numberOfProducts: number = 0;
   isLoading: boolean = true;
   searchOption: string = '';
+  maxHeight: string = '100px';
 
   constructor(private dashboardService: DashboardService) { }
 
