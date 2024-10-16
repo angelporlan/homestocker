@@ -117,7 +117,7 @@ class UserController extends AbstractController
                 'email' => $friendUser->getEmail(),
                 'image' => $friendUser->getImage(),
                 'isConfirmed' => $friend->isConfirmed(), // Estado de la amistad
-                'createdAt' => $friend->getUser()->getId(),
+                'idCreatorFriendhip' => $friend->getUser()->getId(),
             ];
         }, $friends);
     
