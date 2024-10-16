@@ -23,7 +23,7 @@ class Product
     private ?string $category = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $total_quantity = null;
+    private ?int $total_quantity = 0;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $photo = null;

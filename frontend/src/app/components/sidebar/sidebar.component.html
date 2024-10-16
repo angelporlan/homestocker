@@ -20,9 +20,11 @@
             <img src="../../../assets/icons/settings.svg" alt="svg">
             <span>Settings</span>
         </li>
-        <li class="button-add-product" [ngClass]="{ 'active': isActive('add-product') }" (click)="navigateTo('add-product')">
+        <li class="button-add-product" [ngClass]="{ 'active': isActive('add-product') }" (click)="isAddProductActive=true">
             <img src="../../../assets/icons/plus.svg" alt="svg" class="plus-svg">
             <span>Add Product</span>
         </li>
     </ul>
 </div>
+
+<app-add-product *ngIf="isAddProductActive"></app-add-product>

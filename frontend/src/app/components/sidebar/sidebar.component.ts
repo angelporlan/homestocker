@@ -1,16 +1,18 @@
-import { NgClass } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { AddProductComponent } from './add-product/add-product.component';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, AddProductComponent, CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
   currtentRoute: string = '';
+  isAddProductActive: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
@@ -28,6 +30,6 @@ export class SidebarComponent {
     const segments = currentRoute.split('/');
     return segments.includes(path);
   }
-
+  
 
 }

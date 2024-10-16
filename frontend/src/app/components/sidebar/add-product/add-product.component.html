@@ -1,0 +1,37 @@
+<div class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="close()">&times;</span>
+      <h2>Add Product</h2>
+      <form (ngSubmit)="submitForm()">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" [(ngModel)]="product.name" name="name" required>
+        </div>
+        <div>
+          <label for="category">Category:</label>
+          <input type="text" id="category" [(ngModel)]="product.category" name="category" required>
+        </div>
+        <div>
+          <label for="total_quantity">Total Quantity:</label>
+          <input type="number" id="total_quantity" [(ngModel)]="product.total_quantity" name="total_quantity" required>
+        </div>
+        <div>
+          <label for="photo">Photo URL:</label>
+          <input type="text" id="photo" [(ngModel)]="product.photo" name="photo">
+        </div>
+        <div *ngFor="let detail of product.expiration_details; let i = index">
+          <h3>Expiration Detail {{ i + 1 }}</h3>
+          <div>
+            <label for="quantity-{{i}}">Quantity:</label>
+            <input type="number" id="quantity-{{i}}" [(ngModel)]="detail.quantity" name="quantity-{{i}}" required>
+          </div>
+          <div>
+            <label for="expiration_date-{{i}}">Expiration Date:</label>
+            <input type="date" id="expiration_date-{{i}}" [(ngModel)]="detail.expiration_date" name="expiration_date-{{i}}" required>
+          </div>
+        </div>
+        <button type="button" (click)="addExpirationDetail()">Add Expiration Detail</button>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>

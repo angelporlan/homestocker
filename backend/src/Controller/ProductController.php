@@ -70,68 +70,94 @@ class ProductController extends AbstractController
         ]);
     }
 
-    // Crear un nuevo producto en una casa
     #[Route('/houses/{houseId}/products', name: 'product_create', methods: ['POST'])]
     public function create(Request $request, int $houseId): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-
-        // Validar los campos necesarios
+    
         if (!isset($data['name'], $data['category'], $data['quantities'])) {
             return new JsonResponse(['error' => 'Missing required fields'], JsonResponse::HTTP_BAD_REQUEST);
         }
-
+    
         $house = $this->entityManager->getRepository(House::class)->find($houseId);
-
+    
         if (!$house) {
             return new JsonResponse(['error' => 'House not found'], JsonResponse::HTTP_NOT_FOUND);
         }
-
-        // Crear un nuevo producto
+    
+        // creo el producto
         $product = new Product();
         $product->setName($data['name']);
         $product->setCategory($data['category']);
         $product->setHouse($house);
-
-        // Validar si hay foto opcional
+    
+        // compruebo la imagen
         if (isset($data['photo'])) {
-            $product->setPhoto($data['photo']);
+            $photoData = $data['photo'];
+    
+            // verifico que la cadena esté en base64
+            if (preg_match('/^data:image\/(\w+);base64,/', $photoData, $type)) {
+                // borro el prefijo "data:image/*;base64,"
+                $photoData = substr($photoData, strpos($photoData, ',') + 1);
+                $photoData = base64_decode($photoData);
+    
+                if ($photoData === false) {
+                    return new JsonResponse(['error' => 'Invalid base64 encoding'], JsonResponse::HTTP_BAD_REQUEST);
+                }
+    
+                // determino la extensión de la imagen (jpg, png, etc.)
+                $extension = strtolower($type[1]); // obtengo el tipo de imagen (png, jpg, gif, etc.)
+                if (!in_array($extension, ['jpg', 'jpeg', 'png'])) {
+                    return new JsonResponse(['error' => 'Invalid image type'], JsonResponse::HTTP_BAD_REQUEST);
+                }
+    
+                // genero el nombre del archivo
+                $fileName = uniqid() . '.' . $extension;
+    
+                // guardo la imagen en la carpeta `public/uploads/products/`
+                $filePath = $this->getParameter('kernel.project_dir') . '/public/uploads/products/' . $fileName;
+                file_put_contents($filePath, $photoData);
+    
+                // guardo la ruta de la imagen en la base de datos
+                $product->setPhoto('/uploads/products/' . $fileName);
+            } else {
+                return new JsonResponse(['error' => 'Invalid image format'], JsonResponse::HTTP_BAD_REQUEST);
+            }
         }
-
+    
         $totalQuantity = 0;
-
-        // Procesar las cantidades y fechas de expiración
+    
+        // proceso las cantidades y fechas de expiración
         foreach ($data['quantities'] as $quantityData) {
             if (!isset($quantityData['quantity'], $quantityData['expiration_date'])) {
                 return new JsonResponse(['error' => 'Missing quantity or expiration_date'], JsonResponse::HTTP_BAD_REQUEST);
             }
-
+    
             $totalQuantity += $quantityData['quantity'];
-
-            // Crear un nuevo detalle de producto (ProductDetail)
+    
+            // creo un nuevo detalle de producto (ProductDetail)
             $productDetail = new ProductDetail();
             $productDetail->setQuantity($quantityData['quantity']);
-
-            // Parsear la fecha de expiración en formato d-m-Y
+    
+            // cambio la fecha de expiración en formato d-m-Y
             $expirationDate = \DateTime::createFromFormat('d-m-Y', $quantityData['expiration_date']);
             if (!$expirationDate) {
                 return new JsonResponse(['error' => 'Invalid expiration_date format, should be d-m-Y'], JsonResponse::HTTP_BAD_REQUEST);
             }
             $productDetail->setExpirationDate($expirationDate);
-
-            // Asociar el detalle al producto
+    
+            // añado el detalle al producto
             $product->addExpirationDate($productDetail);
-
-            // Persistir el detalle del producto
+    
             $this->entityManager->persist($productDetail);
         }
-
+    
         $product->setTotalQuantity($totalQuantity);
-
+    
         // Guardar el producto en la base de datos
         $this->entityManager->persist($product);
         $this->entityManager->flush();
-
+    
         return new JsonResponse([
             'id' => $product->getId(),
             'name' => $product->getName(),
@@ -141,11 +167,12 @@ class ProductController extends AbstractController
             'expiration_details' => array_map(function ($detail) {
                 return [
                     'quantity' => $detail->getQuantity(),
-                    'expiration_date' => $detail->getExpirationDate()->format('d-m-Y') // Devolver en formato d-m-Y
+                    'expiration_date' => $detail->getExpirationDate()->format('d-m-Y') 
                 ];
             }, $product->getExpirationDates()->toArray())
         ], JsonResponse::HTTP_CREATED);
     }
+    
 
 
 
