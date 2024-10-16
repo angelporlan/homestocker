@@ -5,6 +5,7 @@
     <form (ngSubmit)="submitForm()">
       <div class="photo" (click)="triggerFileInput()">
         <img *ngIf="photoPreview" [src]="photoPreview" alt="Photo Preview" class="photo-preview">
+        <img *ngIf="!photoPreview" src="../../../../assets/icons/image.svg" alt="photo-preview" class="photo-preview">
         <input class="input-file" type="file" id="photo" (change)="onPhotoChange($event)" name="photo">
         <span>Add photo</span>
       </div>
@@ -16,8 +17,8 @@
         <label for="category">Category:</label>
         <input type="text" id="category" [(ngModel)]="product.category" name="category" required>
       </div>
-      <h4 *ngIf="product.expiration_details.length > 0">Expiration details</h4>
-      <div *ngFor="let detail of product.expiration_details; let i = index" class="expiration-detail">
+      <h4 *ngIf="product.quantities.length > 0">Expiration details</h4>
+      <div *ngFor="let detail of product.quantities; let i = index" class="expiration-detail">
         <div>
           <label for="expiration_date-{{i}}">Expiration Date:</label>
           <input type="date" id="expiration_date-{{i}}" [(ngModel)]="detail.expiration_date" name="expiration_date-{{i}}" required>

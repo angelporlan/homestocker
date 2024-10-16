@@ -47,4 +47,10 @@ export class DashboardService {
     this.setHouseProducts(products);
   }
 
+  addProduct(product: any) {
+    const products = this.houseProductsSubject.getValue();
+    products.push(product);
+    this.setHouseProducts(products);
+  }
+
 }
