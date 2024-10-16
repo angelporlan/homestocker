@@ -14,6 +14,7 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
+use App\Entity\Friend;
 
 class UserController extends AbstractController
 {
@@ -87,4 +88,40 @@ class UserController extends AbstractController
             'houses' => $houses
         ]);
     }
+
+    #[Route('/users/friends', name: 'user_friends', methods: ['GET'])]
+    public function friends(): JsonResponse
+    {
+        $user = $this->getUser();
+        
+        if (!$user instanceof User) {
+            throw new AuthenticationException('Invalid user');
+        }
+    
+        // Obtener las solicitudes donde el usuario es el solicitante o el destinatario
+        $friendsRepository = $this->entityManager->getRepository(Friend::class);
+        
+        $sentRequests = $friendsRepository->findBy(['user' => $user]);
+        $receivedRequests = $friendsRepository->findBy(['friend' => $user]);
+    
+        $friends = array_merge($sentRequests, $receivedRequests);
+    
+        // Mapear todas las relaciones de amistad (enviadas y recibidas)
+        $friendsList = array_map(function (Friend $friend) use ($user) {
+            // Determinar cuál es el "amigo" (el otro usuario en la relación de amistad)
+            $friendUser = $friend->getUser() === $user ? $friend->getFriend() : $friend->getUser();
+    
+            return [
+                'id' => $friendUser->getId(),
+                'username' => $friendUser->getUsername(),
+                'email' => $friendUser->getEmail(),
+                'image' => $friendUser->getImage(),
+                'isConfirmed' => $friend->isConfirmed(), // Estado de la amistad
+                'createdAt' => $friend->getUser()->getId(),
+            ];
+        }, $friends);
+    
+        return new JsonResponse($friendsList);
+    }
+    
 }
