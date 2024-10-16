@@ -27,4 +27,4 @@
     </ul>
 </div>
 
-<app-add-product *ngIf="isAddProductActive"></app-add-product>
+<app-add-product *ngIf="isAddProductActive" (closeModal)="isAddProductActive=false"></app-add-product>

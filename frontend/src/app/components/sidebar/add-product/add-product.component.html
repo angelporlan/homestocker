@@ -1,37 +1,37 @@
 <div class="modal">
-    <div class="modal-content">
-      <span class="close" (click)="close()">&times;</span>
-      <h2>Add Product</h2>
-      <form (ngSubmit)="submitForm()">
+  <div class="modal-content">
+    <span class="close" (click)="close()">&times;</span>
+    <h2>Add Product</h2>
+    <form (ngSubmit)="submitForm()">
+      <div class="photo" (click)="triggerFileInput()">
+        <img *ngIf="photoPreview" [src]="photoPreview" alt="Photo Preview" class="photo-preview">
+        <input class="input-file" type="file" id="photo" (change)="onPhotoChange($event)" name="photo">
+        <span>Add photo</span>
+      </div>
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="product.name" name="name" required>
+      </div>
+      <div>
+        <label for="category">Category:</label>
+        <input type="text" id="category" [(ngModel)]="product.category" name="category" required>
+      </div>
+      <h4 *ngIf="product.expiration_details.length > 0">Expiration details</h4>
+      <div *ngFor="let detail of product.expiration_details; let i = index" class="expiration-detail">
         <div>
-          <label for="name">Name:</label>
-          <input type="text" id="name" [(ngModel)]="product.name" name="name" required>
+          <label for="expiration_date-{{i}}">Expiration Date:</label>
+          <input type="date" id="expiration_date-{{i}}" [(ngModel)]="detail.expiration_date" name="expiration_date-{{i}}" required>
         </div>
         <div>
-          <label for="category">Category:</label>
-          <input type="text" id="category" [(ngModel)]="product.category" name="category" required>
+          <label for="quantity-{{i}}">Quantity:</label>
+          <input type="number" id="quantity-{{i}}" [(ngModel)]="detail.quantity" name="quantity-{{i}}" required>
         </div>
-        <div>
-          <label for="total_quantity">Total Quantity:</label>
-          <input type="number" id="total_quantity" [(ngModel)]="product.total_quantity" name="total_quantity" required>
-        </div>
-        <div>
-          <label for="photo">Photo URL:</label>
-          <input type="text" id="photo" [(ngModel)]="product.photo" name="photo">
-        </div>
-        <div *ngFor="let detail of product.expiration_details; let i = index">
-          <h3>Expiration Detail {{ i + 1 }}</h3>
-          <div>
-            <label for="quantity-{{i}}">Quantity:</label>
-            <input type="number" id="quantity-{{i}}" [(ngModel)]="detail.quantity" name="quantity-{{i}}" required>
-          </div>
-          <div>
-            <label for="expiration_date-{{i}}">Expiration Date:</label>
-            <input type="date" id="expiration_date-{{i}}" [(ngModel)]="detail.expiration_date" name="expiration_date-{{i}}" required>
-          </div>
-        </div>
-        <button type="button" (click)="addExpirationDetail()">Add Expiration Detail</button>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+        <button type="button" (click)="removeExpirationDetail(i)" class="remove-expiration">Remove</button>
+      </div>
+      <div class="buttons">
+        <button type="button" (click)="addExpirationDetail()" class="add-button">Add Expiration Detail</button>
+        <button type="submit" class="submit-button">Submit</button>
+      </div>
+    </form>
   </div>
+</div>

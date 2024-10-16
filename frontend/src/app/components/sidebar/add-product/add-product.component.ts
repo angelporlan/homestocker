@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -10,12 +10,10 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './add-product.component.css'
 })
 export class AddProductComponent {
-  @Output() closeModal: boolean = false;
-  showModal: boolean = false;
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter<boolean>();
   product: any = {
     name: '',
     category: '',
-    total_quantity: 0,
     photo: '',
     expiration_details: [
       {
@@ -24,13 +22,13 @@ export class AddProductComponent {
       }
     ]
   };
+  photoPreview: string | ArrayBuffer | null = '../../../../assets/icons/image.svg';
+  inputFile: any;
 
   constructor() {}
 
   close(): void {
-    this.closeModal = true;
-    //emitir el output closeModal
-
+    this.closeModal.emit(true);
   }
 
   addExpirationDetail(): void {
@@ -41,8 +39,30 @@ export class AddProductComponent {
   }
 
   submitForm(): void {
+    this.product.photo = this.photoPreview as string;
     console.log('Product submitted', this.product);
     this.close();
   }
+
+  removeExpirationDetail(index: number): void {
+    this.product.expiration_details.splice(index, 1);
+  }
+
+  onPhotoChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.photoPreview = e.target?.result ?? null;
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  triggerFileInput(): void {
+    const fileInput = document.getElementById('photo') as HTMLInputElement;
+    fileInput.click();
+  }
+
 
 }
