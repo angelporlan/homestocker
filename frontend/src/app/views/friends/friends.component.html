@@ -7,8 +7,10 @@
     </div>
     <app-search placeholder="Search for Users" (searchChange)="onSearchChange($event)"></app-search>
 
+    <app-filter [options]="options" (optionChange)="onFilterChange($event)"></app-filter>
+
     <div class="users">
-        <app-user-box *ngFor="let friend of friends" [user]="friend"></app-user-box>
+        <app-user-box *ngFor="let friend of currentUsers" [user]="friend" (userChange)="ngOnInit()"></app-user-box>
         <p *ngIf="friends.length < 1" class="no-users-info">No users found</p>
     </div>
 </div>

@@ -17,4 +17,18 @@ export class FriendService {
     }
     return this.http.get(`${this.apiUrl}/users/friends`, { headers });
   }
+
+  sendOrAcceptFriendRequest(id: number): any {
+    const headers = {
+      'Authorization': `Bearer ${this.AuthService.getToken()}`
+    }
+    return this.http.post(`${this.apiUrl}/friend/${id}`, {}, { headers });
+  }
+
+  rejectOrDeleteFriendRequest(id: number): any {
+    const headers = {
+      'Authorization': `Bearer ${this.AuthService.getToken()}`
+    }
+    return this.http.delete(`${this.apiUrl}/friend/${id}`, { headers });
+  }
 }

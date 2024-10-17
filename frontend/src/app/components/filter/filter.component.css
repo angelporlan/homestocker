@@ -1,64 +1,75 @@
+.filter {
+  display: flex;
+  align-items: center;
+}
+
+.filter img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
 
 .filter {
-    display: flex;
-    align-items: center;
-  }
-  
-  .filter img {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-  }
-  
-  
-  .filter {
-    position: relative;
-    display: inline-block;
-    width: 190px;
-    margin-top: 12px;
-  }
-  
-  select {
-    appearance: none;
-    -webkit-appearance: none;
-    /* Safari */
-    -moz-appearance: none;
-    /* Firefox */
-    background: none;
-    border: none;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 4px;
-    width: 100%;
-  }
-  
-  select:focus {
-    outline: none;
-  }
-  
-  .select-icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    width: 20px;
-    height: 20px;
-    right: 60px;
-  }
-  
-  .soon {
-    right: 60px;
-  }
-  
-  .last {
-    right: 68px;
-  }
-  
-  .alphabetical {
-    left: 158px;
-  }
+  position: relative;
+  display: inline-block;
+  width: 190px;
+  margin-top: 12px;
+}
 
-  .quantity {
-    left: 75px;
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  /* Safari */
+  -moz-appearance: none;
+  /* Firefox */
+  background: none;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 100%;
+}
+
+select:focus {
+  outline: none;
+}
+
+.select-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 20px;
+  height: 20px;
+  right: 60px;
+}
+
+.soon {
+  right: 60px;
+}
+
+.last {
+  right: 68px;
+}
+
+.alphabetical {
+  left: 158px;
+}
+
+.quantity {
+  left: 75px;
+}
+
+.requested {
+  left: 90px;
+}
+
+.pending {
+  left: 72px;
+}
+
+.friends {
+  left: 65px;
 }

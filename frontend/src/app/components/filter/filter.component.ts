@@ -10,12 +10,19 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './filter.component.css'
 })
 export class FilterComponent {
-  selectedOption: string = 'soon';
-  selectedClass: string = 'soon';
-
   @Input() options: any = [];
 
+  selectedOption: string = '';
+  selectedClass: string = '';
+
   @Output() optionChange: EventEmitter<string> = new EventEmitter<string>();
+
+  ngOnInit(): void {
+    if (this.options.length > 0) {
+      this.selectedOption = this.options[0].value;
+      this.selectedClass = this.options[0].value;
+    }
+  }
 
   onSelectChange(): void {
     this.selectedClass = this.selectedOption;

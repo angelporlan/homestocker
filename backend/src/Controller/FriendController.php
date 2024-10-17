@@ -18,7 +18,7 @@ class FriendController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/friend/{userId}', name: 'app_friend')]
+    #[Route('/friend/{userId}', name: 'app_friend', methods: ['POST'])]
     public function addFriend($userId): JsonResponse
     {
         $user = $this->entityManager->getRepository(User::class)->find($userId);
@@ -66,6 +66,37 @@ class FriendController extends AbstractController
         $this->entityManager->flush();
     
         return new JsonResponse(['message' => 'Friend request sent']);
+    }
+
+    #[Route('/friend/{userId}', name: 'app_delete_friend', methods: ['DELETE'])]
+    public function deleteFriend($userId): JsonResponse
+    {
+        $user = $this->entityManager->getRepository(User::class)->find($userId);
+        if (!$user) {
+            return new JsonResponse(['error' => 'User not found'], 404);
+        }
+    
+        $currentUser = $this->getUser();
+        if (!$currentUser instanceof User) {
+            return new JsonResponse(['error' => 'Invalid user'], 401);
+        }
+    
+        $friendship = $this->entityManager->getRepository(Friend::class)->findOneBy([
+            'user' => $currentUser,
+            'friend' => $user
+        ]) ?? $this->entityManager->getRepository(Friend::class)->findOneBy([
+            'user' => $user,
+            'friend' => $currentUser
+        ]);
+    
+        if (!$friendship) {
+            return new JsonResponse(['error' => 'Friendship not found'], 404);
+        }
+    
+        $this->entityManager->remove($friendship);
+        $this->entityManager->flush();
+    
+        return new JsonResponse(['message' => 'Friendship deleted']);
     }
     
 }
