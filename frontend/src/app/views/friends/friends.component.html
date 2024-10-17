@@ -1,1 +1,16 @@
 <app-navbar></app-navbar>
+
+<div class="content" *ngIf="!isLoading">
+    <div class="h2-header">
+        <h2>Friends</h2>
+        <button>Add Friend</button>
+    </div>
+    <app-search placeholder="Search for Users" (searchChange)="onSearchChange($event)"></app-search>
+
+    <div class="users">
+        <app-user-box *ngFor="let friend of friends" [user]="friend"></app-user-box>
+        <p *ngIf="friends.length < 1" class="no-users-info">No users found</p>
+    </div>
+</div>
+
+<app-loader *ngIf="isLoading"></app-loader>

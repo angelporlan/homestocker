@@ -40,6 +40,11 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
+  getIdUser(): any {
+    const user = localStorage.getItem('currentUserHomeStocker');
+    return user ? JSON.parse(user).id : null;
+  }
+
   getToken(): any {
     return localStorage.getItem('tokenHomeStocker');
   }

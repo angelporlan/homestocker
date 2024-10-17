@@ -1,6 +1,6 @@
 <h2>Products</h2>
 
-<app-search (searchChange)="onSearchChange($event)"></app-search>
+<app-search placeholder="Search for Products" (searchChange)="onSearchChange($event)"></app-search>
 
 <div *ngIf="!isLoading">
     <div class="filter">

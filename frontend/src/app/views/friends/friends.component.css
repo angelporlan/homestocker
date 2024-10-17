@@ -1,0 +1,38 @@
+.content {
+    margin: 0 12px;
+}
+
+.h2-header {
+    margin-top: 8px;
+}
+
+.h2-header button {
+    width: 100%;
+    padding: 8px;
+    background-color: var(--blue-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.h2-header button:hover {
+    background-color: var(--blue-hover-color);
+}
+
+@media (min-width: 400px) {
+    .content {
+        margin: 12px 24px;
+    }
+    .h2-header {
+        display: flex;
+    }
+
+    .h2-header button {
+        width: auto;
+        margin-left: auto;
+        margin-top: 0;
+        padding: 12px 24px;
+    }
+}
