@@ -6,11 +6,12 @@ import { LoaderComponent } from '../../loader/loader.component';
 import { ProductBoxComponent } from '../home/product-box/product-box.component';
 import { finalize } from 'rxjs';
 import { SearchComponent } from '../../search/search.component';
+import { FilterComponent } from '../../filter/filter.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [NgClass, FormsModule, LoaderComponent, CommonModule, ProductBoxComponent, SearchComponent],
+  imports: [NgClass, FormsModule, LoaderComponent, CommonModule, ProductBoxComponent, SearchComponent, FilterComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -23,6 +24,12 @@ export class ProductsComponent {
   isLoading: boolean = true;
   searchOption: string = '';
   maxHeight: string = '100px';
+
+  options = [
+    { value: 'soon', label: 'Expired soon' },
+    { value: 'alphabetical', label: 'Alphabetical order' },  
+    { value: 'last', label: 'Expired last' },
+  ];
 
   constructor(private dashboardService: DashboardService) { }
 
@@ -102,12 +109,13 @@ export class ProductsComponent {
     this.filteredProducts = filtered;
   }
 
-  onSelectChange() {
+  onSearchChange(searchValue: string) {
+    this.searchOption = searchValue;
     this.applyFilters();
   }
 
-  onSearchChange(searchValue: string) {
-    this.searchOption = searchValue;
+  onFilterChange(filterValue: any) {
+    this.selectedOption = filterValue;
     this.applyFilters();
   }
 }

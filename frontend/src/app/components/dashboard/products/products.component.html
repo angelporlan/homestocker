@@ -3,15 +3,8 @@
 <app-search placeholder="Search for Products" (searchChange)="onSearchChange($event)"></app-search>
 
 <div *ngIf="!isLoading">
-    <div class="filter">
-        <select [(ngModel)]="selectedOption" (change)="onSelectChange()">
-            <option value="soon">Expired soon</option>
-            <option value="alphabetical">Alphabetical order</option>
-            <option value="last">Expired last</option>
-        </select>
-        <img src="../../../../assets/icons/filter.svg" alt="filter" class="select-icon"
-            [ngClass]="{'alphabetical': selectedClass == 'alphabetical', 'soon': selectedClass == 'soon', 'last': selectedClass == 'last'}">
-    </div>
+
+    <app-filter [options]="options" (optionChange)="onFilterChange($event)"></app-filter>
 
     <div class="products">
         <app-product-box *ngFor="let product of filteredProducts" [product]="product"></app-product-box>

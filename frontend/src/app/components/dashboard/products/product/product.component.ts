@@ -7,11 +7,12 @@ import { CommonModule } from '@angular/common';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductsComponent } from "../products.component";
 import { FormsModule } from '@angular/forms';
+import { FilterComponent } from '../../../filter/filter.component';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [LoaderComponent, CommonModule, ProductDetailComponent, ProductsComponent, FormsModule],
+  imports: [LoaderComponent, CommonModule, ProductDetailComponent, ProductsComponent, FormsModule, FilterComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -28,6 +29,12 @@ export class ProductComponent {
 
   selectedClass: string = '';
   selectedOption: string = 'soon';
+
+  options = [
+    { value: 'soon', label: 'Expired soon' },
+    { value: 'quantity', label: 'Quantity' },  
+    { value: 'last', label: 'Expired last' },
+  ];
 
   constructor(private route: ActivatedRoute, private productService: ProductService, private dashboardService: DashboardService, private router: Router) { }
 
@@ -166,7 +173,8 @@ export class ProductComponent {
     }
   }
 
-  onSelectChange(): void {
+  onFilterChange(selectdOption: any): void {
+    this.selectedOption = selectdOption;
     this.applyFilters();
   }
 

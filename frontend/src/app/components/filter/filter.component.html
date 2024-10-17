@@ -1,0 +1,12 @@
+<div class="filter">
+    <select [(ngModel)]="selectedOption" (change)="onSelectChange()">
+        <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+    </select>
+    <img src="../../../assets/icons/filter.svg" alt="filter" class="select-icon"
+    [ngClass]="
+    {'alphabetical': selectedClass == 'alphabetical', 
+    'soon': selectedClass == 'soon', 
+    'last': selectedClass == 'last',
+    'quantity': selectedClass == 'quantity'
+    }" />
+</div>
