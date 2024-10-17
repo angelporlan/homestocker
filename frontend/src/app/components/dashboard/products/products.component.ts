@@ -5,11 +5,12 @@ import { DashboardService } from '../../../services/dashboard.service';
 import { LoaderComponent } from '../../loader/loader.component';
 import { ProductBoxComponent } from '../home/product-box/product-box.component';
 import { finalize } from 'rxjs';
+import { SearchComponent } from '../../search/search.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [NgClass, FormsModule, LoaderComponent, CommonModule, ProductBoxComponent],
+  imports: [NgClass, FormsModule, LoaderComponent, CommonModule, ProductBoxComponent, SearchComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -105,8 +106,8 @@ export class ProductsComponent {
     this.applyFilters();
   }
 
-  onSearchChange(event: Event) {
-    this.searchOption = (event.target as HTMLInputElement).value;
+  onSearchChange(searchValue: string) {
+    this.searchOption = searchValue;
     this.applyFilters();
   }
 }
