@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class HouseService {
 
   private apiUrl: string = 'http://127.0.0.1:8000/api';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getNumberHouseProducts(houseId: number, token: string): Observable<any> {
     const headers = new HttpHeaders({
@@ -44,5 +45,15 @@ export class HouseService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.get(`${this.apiUrl}/houses/${houseId}`, { headers });
+  }
+
+  addMember(houseId: number, userId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getToken()}`
+    });
+    const body = {
+      user_id: userId
+    };
+    return this.http.post(`${this.apiUrl}/houses/${houseId}/addMember`, body, { headers });
   }
 }

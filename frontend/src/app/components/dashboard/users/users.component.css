@@ -29,3 +29,73 @@
     font-weight: 400;
     font-size: 16px;
 }
+
+/* Estilos para el fondo del modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegurar que el modal esté por encima de otros elementos */
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    width: 400px;
+    max-width: 90%; /* Adaptar a pantallas más pequeñas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón "X" de cierre en la esquina superior derecha */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #ff5c5c; /* Cambia a rojo al pasar el mouse */
+}
+
+/* Botón de cierre en la parte inferior */
+.close-footer-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.close-footer-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para la lista de usuarios */
+.user-list {
+    max-height: 300px;
+    overflow-y: auto; /* Scroll si la lista es muy larga */
+    margin-top: 20px;
+}
+
+.user-list app-user-box {
+    margin-bottom: 10px; /* Espaciado entre los elementos de usuario */
+}

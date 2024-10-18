@@ -1,14 +1,29 @@
 <h2>Users</h2>
 
-<div class="add-user">
+<div class="add-user" (click)="modalAddUser()">
     <div class="add-img">
         <img src="../../../../assets/icons/plus.svg" alt="plus-icon">
     </div>
     <p>Add a user</p>
 </div>
 
+<app-search placeholder="Search for User" (searchChange)="onSearch($event)"></app-search>
+
 <div class="users">
-    <app-user-box *ngFor="let user of houseUsers" [user]="user"></app-user-box>
+    <app-user-box *ngFor="let user of filteredUsers" [user]="user"></app-user-box>
 </div>
 
 <app-loader *ngIf="isLoading"></app-loader>
+
+<div *ngIf="addUserModal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" (click)="addUserModal=false" aria-label="Close modal">
+            &times;
+        </button>
+        
+        <h3>Select a User to Add</h3>
+        <div class="user-list">
+            <app-user-box *ngFor="let user of availableUsers" [user]="user" (click)="addUser(user)"></app-user-box>
+        </div>
+    </div>
+</div>

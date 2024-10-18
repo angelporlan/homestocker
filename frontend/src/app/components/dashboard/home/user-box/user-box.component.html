@@ -4,7 +4,7 @@
         <p class="username">{{user.username}}</p>
     </div>
 
-    <div class="buttons" *ngIf="user.idCreatorFriendhip != getId() && !user.isConfirmed">
+    <div class="buttons" *ngIf="user.idCreatorFriendhip && user.idCreatorFriendhip != getId() && !user.isConfirmed">
         <button class="accept" (click)="acceptFriendship(user.idCreatorFriendhip)">Accept</button>
         <button class="reject" (click)="rejectFriendship(user.idCreatorFriendhip)">Reject</button>
     </div>
