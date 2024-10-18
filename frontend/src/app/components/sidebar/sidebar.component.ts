@@ -13,6 +13,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 export class SidebarComponent {
   currtentRoute: string = '';
   isAddProductActive: boolean = false;
+  isSidebarHidden: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
@@ -30,6 +31,5 @@ export class SidebarComponent {
     const segments = currentRoute.split('/');
     return segments.includes(path);
   }
-  
 
 }

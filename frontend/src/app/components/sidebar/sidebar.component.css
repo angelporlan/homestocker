@@ -2,7 +2,6 @@ img {
     width: 24px;
     height: 24px;
     margin: 10px 10px;
-
 }
 
 span {
@@ -14,6 +13,29 @@ span {
     height: calc(100vh - 73.6px);
     padding: 12px;
     display: flex;
+    position: relative;
+    border-right: 1px solid var(--gray-color);
+    transition: .3s ease-in-out;
+}
+
+.arrow {
+    position: absolute;
+    top: 0;
+    right: -22px;
+    border: 1px solid var(--gray-hover-color);
+    border-radius: 50%;
+    z-index: 10;
+    background-color: #fff;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+
+.arrow:hover {
+    background-color: var(--gray-color);
+}
+
+.hidden-img {
+    rotate: 180deg;
 }
 
 ul {
@@ -51,6 +73,18 @@ li:hover {
     color: white;
 }
 
+@media (max-width: 800px) {
+    
+    .hidden-box {
+        width: 20px;
+        border: none;
+    }
+    
+    .hidden-ul {
+        display: none;
+    }
+}
+
 @media (min-width: 800px) {
     span {
         display: block;
@@ -58,13 +92,30 @@ li:hover {
 
     .box {
         width: 240px;
+        transition: width 0.3s ease;
     }
+
     .plus-svg {
         display: none;
+    }
+
+    .hidden-plus {
+        display: block;
     }
 
     .button-add-product {
         justify-content: center;
         height: 44px;
+    }
+
+    .hidden-box {
+        width: 68px;
+    }
+    
+    /* .hidden-ul {
+    } */
+
+    .hidden-span {
+        display: none;
     }
 }

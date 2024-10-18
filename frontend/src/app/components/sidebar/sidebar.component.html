@@ -1,30 +1,31 @@
-<div class="box">
-    <ul class="list-unstyled components">
+<div class="box" [ngClass]="{ 'hidden-box': isSidebarHidden }">
+    <ul class="list-unstyled components" [ngClass]="{ 'hidden-ul': isSidebarHidden }">
         <li [ngClass]="{ 'active': isActive('home') }" (click)="navigateTo('home')">
             <img src="../../../assets/icons/home.svg" alt="svg">
-            <span>Home</span>
+            <span [ngClass]="{ 'hidden-span': isSidebarHidden }">Home</span>
         </li>
         <li [ngClass]="{ 'active': isActive('products') || isActive('product') }" (click)="navigateTo('products')">
             <img src="../../../assets/icons/products.svg" alt="svg">
-            <span>Products</span>
+            <span [ngClass]="{ 'hidden-span': isSidebarHidden }">Products</span>
         </li>
         <li [ngClass]="{ 'active': isActive('users') }" (click)="navigateTo('users')">
             <img src="../../../assets/icons/users.svg" alt="svg">
-            <span>Users</span>
+            <span [ngClass]="{ 'hidden-span': isSidebarHidden }">Users</span>
         </li>
         <li [ngClass]="{ 'active': isActive('notifications') }" (click)="navigateTo('notifications')">
             <img src="../../../assets/icons/notifications.svg" alt="svg">
-            <span>Notifications</span>
+            <span [ngClass]="{ 'hidden-span': isSidebarHidden }">Notifications</span>
         </li>
         <li [ngClass]="{ 'active': isActive('settings') }" (click)="navigateTo('settings')">
             <img src="../../../assets/icons/settings.svg" alt="svg">
-            <span>Settings</span>
+            <span [ngClass]="{ 'hidden-span': isSidebarHidden }">Settings</span>
         </li>
         <li class="button-add-product" [ngClass]="{ 'active': isActive('add-product') }" (click)="isAddProductActive=true">
-            <img src="../../../assets/icons/plus.svg" alt="svg" class="plus-svg">
-            <span>Add Product</span>
+            <img src="../../../assets/icons/plus.svg" [ngClass]="{ 'hidden-plus': isSidebarHidden }" alt="svg" class="plus-svg">
+            <span [ngClass]="{ 'hidden-span': isSidebarHidden }">Add Product</span>
         </li>
     </ul>
+    <img src="../../../assets/icons/arrow.svg" class="arrow" alt="arrow" [ngClass]="{ 'hidden-img': isSidebarHidden }" (click)="isSidebarHidden = !isSidebarHidden;">
 </div>
 
 <app-add-product *ngIf="isAddProductActive" (closeModal)="isAddProductActive=false"></app-add-product>
