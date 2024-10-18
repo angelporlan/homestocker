@@ -12,6 +12,7 @@ import { UsersComponent } from './components/dashboard/users/users.component';
 import { NotificationsComponent } from './components/dashboard/notifications/notifications.component';
 import { SettingsComponent } from './components/dashboard/settings/settings.component';
 import { ProductComponent } from './components/dashboard/products/product/product.component';
+import { ShoppingListComponent } from './components/dashboard/shopping-list/shopping-list.component';
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent},
@@ -23,6 +24,7 @@ export const routes: Routes = [
         { path: 'products', component: ProductsComponent},
         { path: 'product/:id', component: ProductComponent}, 
         { path: 'users', component: UsersComponent},
+        { path: 'shopping-list', component: ShoppingListComponent},
         { path: 'notifications', component: NotificationsComponent},
         { path: 'settings', component: SettingsComponent}, 
     ]},

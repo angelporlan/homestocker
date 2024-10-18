@@ -12,6 +12,10 @@
             <img src="../../../assets/icons/users.svg" alt="svg">
             <span [ngClass]="{ 'hidden-span': isSidebarHidden }">Users</span>
         </li>
+        <li [ngClass]="{ 'active': isActive('shopping-list') }" (click)="navigateTo('shopping-list')">
+            <img src="../../../assets/icons/shopping-list.svg" alt="svg">
+            <span [ngClass]="{ 'hidden-span': isSidebarHidden }">Shopping List</span>
+        </li>
         <li [ngClass]="{ 'active': isActive('notifications') }" (click)="navigateTo('notifications')">
             <img src="../../../assets/icons/notifications.svg" alt="svg">
             <span [ngClass]="{ 'hidden-span': isSidebarHidden }">Notifications</span>
