@@ -6,6 +6,7 @@ import { LoaderComponent } from '../../loader/loader.component';
 import { SearchComponent } from '../../search/search.component';
 import { FriendService } from '../../../services/friend.service';
 import { HouseService } from '../../../services/house.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-users',
@@ -22,7 +23,15 @@ export class UsersComponent {
   isLoading: boolean = true;
   addUserModal: boolean = false;
 
-  constructor(private dashboardService: DashboardService, private friendService: FriendService, private houseService: HouseService) {}
+  constructor(private dashboardService: DashboardService, private friendService: FriendService, private houseService: HouseService, private snackBar: MatSnackBar ) {}
+
+  showMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center'
+    });
+  }
 
   ngOnInit(): void {
     this.isLoading = true; 
@@ -54,8 +63,10 @@ export class UsersComponent {
         this.houseUsers.push(user);
         this.filteredUsers = this.houseUsers;
         this.addUserModal = false;
+        this.showMessage('User added successfully');
       },
       error: (err) => {
+        this.showMessage('Error adding user');
         console.error('Error adding user', err);
       }
     });

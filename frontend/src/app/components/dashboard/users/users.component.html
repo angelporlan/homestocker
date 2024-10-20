@@ -11,6 +11,7 @@
 
 <div class="users">
     <app-user-box *ngFor="let user of filteredUsers" [user]="user"></app-user-box>
+    <p *ngIf="filteredUsers.length < 1">Not users founds</p>
 </div>
 
 <app-loader *ngIf="isLoading"></app-loader>
@@ -24,6 +25,7 @@
         <h3>Select a User to Add</h3>
         <div class="user-list">
             <app-user-box *ngFor="let user of availableUsers" [user]="user" (click)="addUser(user)"></app-user-box>
+            <p *ngIf="availableUsers.length < 1">Not users availables</p>
         </div>
     </div>
 </div>
