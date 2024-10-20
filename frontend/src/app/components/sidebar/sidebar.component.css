@@ -24,7 +24,6 @@ span {
     right: -22px;
     border: 1px solid var(--gray-hover-color);
     border-radius: 50%;
-    z-index: 10;
     background-color: #fff;
     cursor: pointer;
     transition: .5s ease-in-out;
