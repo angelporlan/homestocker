@@ -35,7 +35,7 @@ export class AuthComponent {
   ) {}
 
   showMessage(message: string): void {
-    this.snackBar.open(message, 'Cerrar', {
+    this.snackBar.open(message, 'Close', {
       duration: 3000, 
       verticalPosition: 'top',
       horizontalPosition: 'center'

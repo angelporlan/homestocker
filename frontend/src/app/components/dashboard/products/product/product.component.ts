@@ -8,6 +8,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductsComponent } from "../products.component";
 import { FormsModule } from '@angular/forms';
 import { FilterComponent } from '../../../filter/filter.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product',
@@ -32,11 +33,16 @@ export class ProductComponent {
 
   options = [
     { value: 'soon', label: 'Expired soon' },
-    { value: 'quantity', label: 'Quantity' },  
+    { value: 'quantity', label: 'Quantity' },
     { value: 'last', label: 'Expired last' },
   ];
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private dashboardService: DashboardService, private router: Router) { }
+  constructor(private route: ActivatedRoute,
+    private productService: ProductService,
+    private dashboardService: DashboardService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -57,7 +63,7 @@ export class ProductComponent {
         this.product.expiration_details = this.sortDatesAsc(this.product.expiration_details);
         this.isLoading = false;
       } else {
-        if (id !== null) {            
+        if (id !== null) {
           this.productService.getProductById(id).subscribe({
             next: (product: any) => {
               this.product = product;
@@ -74,6 +80,14 @@ export class ProductComponent {
     });
   }
 
+  showMessage(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      verticalPosition: 'top',
+      horizontalPosition: 'center'
+    });
+  }
+
   onEdit(): void {
     console.log('Edit product');
   }
@@ -82,25 +96,21 @@ export class ProductComponent {
     this.productService.deleteProduct(this.product.id).subscribe(
       () => {
         this.dashboardService.deleteProductById(this.product.id);
-    
-        const currentRoute = this.router.url; 
-    
+
+        const currentRoute = this.router.url;
+
         const segments = currentRoute.split('/');
-        const houseId = segments[2]; 
-    
+        const houseId = segments[2];
+
         const newRoute = `/dashboard/${houseId}/products`;
-    
+
         this.router.navigate([newRoute]);
       },
       (error: any) => {
         console.error('Error deleting product', error);
       }
     );
-    
-  }
 
-  onAdd(): void {
-    console.log('Back to products');
   }
 
   onProductUpdated(updatedProduct: any): void {
@@ -121,20 +131,24 @@ export class ProductComponent {
       const formattedDate = this.formatDate(this.newExpirationDate);
       this.productService.addDetailProduct(this.product.id, this.newQuantity, formattedDate).subscribe(
         (response: any) => {
-          this.showModal=false;
+          this.showModal = false;
           this.onProductUpdated(response);
+          this.showMessage('Product added successfully');
+          this.newExpirationDate = '';
+          this.newQuantity = 0;
         },
         (error: any) => {
+          this.showMessage('Error adding detail product');
           console.error('Error adding detail product', error);
         }
       );
     }
   }
-  
+
   formatDate(dateString: string): string {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
     return `${day}-${month}-${year}`;
   }
@@ -154,7 +168,7 @@ export class ProductComponent {
       return dateA - dateB;
     });
   }
-  
+
   formatDateForSort(dateString: string): string {
     const parts = dateString.split('-');
     return `${parts[2]}-${parts[1]}-${parts[0]}`;

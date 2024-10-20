@@ -19,10 +19,11 @@
             <button (click)="showModal=true">Add</button>
         </div>
 
-        <app-filter [options]="options" (optionChange)="onFilterChange($event)"></app-filter>
+        <app-filter *ngIf="product.expiration_details.length > 1" [options]="options" (optionChange)="onFilterChange($event)"></app-filter>
 
-        <div class="expiration-date" *ngFor="let date of product.expiration_details">
-            <app-product-detail [productDetail]="date" [productId]="product.id" (productDetailChange)="onProductUpdated($event)"></app-product-detail>
+        <div class="expiration-date">
+            <app-product-detail *ngFor="let date of product.expiration_details" [productDetail]="date" [productId]="product.id" (productDetailChange)="onProductUpdated($event)"></app-product-detail>
+            <p *ngIf="product.expiration_details.length < 1">Not product yet</p>
         </div>
     </div>
 

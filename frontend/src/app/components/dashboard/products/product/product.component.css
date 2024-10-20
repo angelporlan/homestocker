@@ -149,7 +149,10 @@ form button[type="submit"]:hover {
     cursor: pointer;
 }
 
-
+.expiration-date p {
+    margin-top: 12px;
+    font-weight: 400;
+}
 
 
 @media (max-width: 400px) {

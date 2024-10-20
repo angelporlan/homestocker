@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProductService } from '../../../../../services/product.service';
 import { DashboardService } from '../../../../../services/dashboard.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,7 +15,15 @@ export class ProductDetailComponent {
   @Input() productId: number | undefined;
   @Output() productDetailChange = new EventEmitter<any>();
 
-  constructor(private productService: ProductService, private dashboardService: DashboardService) { }
+  constructor(private productService: ProductService, private dashboardService: DashboardService, private snackBar: MatSnackBar) { }
+
+  showMessage(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center'
+    });
+  }
 
   formatDate(date: string | null | undefined): string {
     if (!date) {
@@ -74,9 +83,11 @@ export class ProductDetailComponent {
     if (this.productId !== undefined) {
       this.productService.addDetailProduct(this.productId, 1, this.productDetail.expiration_date).subscribe(
         (response: any) => {
-            this.productDetailChange.emit(response);
+          this.showMessage('Product detail added successfully');
+          this.productDetailChange.emit(response);
         },
         (error: any) => {
+          this.showMessage('Error adding detail product');
           console.error('error: ' + JSON.stringify(error));
         }
       );
@@ -89,9 +100,11 @@ export class ProductDetailComponent {
     if (this.productId !== undefined) {
       this.productService.removeDetailProduct(this.productId, 1, this.productDetail.expiration_date).subscribe(
         (response: any) => {
-            this.productDetailChange.emit(response);
+          this.showMessage('Product detail removed successfully');
+          this.productDetailChange.emit(response);
         },
         (error: any) => {
+          this.showMessage('Error removing detail product');
           console.error('error: ' + JSON.stringify(error));
         }
       );
