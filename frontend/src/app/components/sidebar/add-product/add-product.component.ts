@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
 import { DashboardService } from '../../../services/dashboard.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-product',
@@ -27,7 +28,15 @@ export class AddProductComponent {
   photoPreview: string | ArrayBuffer | null = null;
   inputFile: any;
 
-  constructor(private productService: ProductService, private dashboardService: DashboardService) {}
+  constructor(private productService: ProductService, private dashboardService: DashboardService, private snackBar: MatSnackBar) {}
+
+  showMessage(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 3000, 
+      verticalPosition: 'top',
+      horizontalPosition: 'center'
+    });
+  }
 
   close(): void {
     this.closeModal.emit(true);
@@ -52,8 +61,12 @@ export class AddProductComponent {
     const houseId = this.getHouseIdFromUrl();
     this.productService.addProduct(houseId, this.product).subscribe((response: any) => {
       console.log('Product added', response);
+      this.showMessage('Producto agregado correctamente');
       this.dashboardService.addProduct(response);
       this.close();
+    } , (error: any) => {
+      console.error('Error adding product', error);
+      this.showMessage('Error al agregar el producto');
     });
   }
 

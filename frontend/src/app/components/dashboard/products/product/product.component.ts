@@ -105,8 +105,10 @@ export class ProductComponent {
         const newRoute = `/dashboard/${houseId}/products`;
 
         this.router.navigate([newRoute]);
+        this.showMessage('Product deleted successfully');
       },
       (error: any) => {
+        this.showMessage('Error deleting product');
         console.error('Error deleting product', error);
       }
     );
