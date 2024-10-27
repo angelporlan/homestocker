@@ -1,0 +1,45 @@
+.image {
+    background-color: rgb(173, 237, 173);
+    padding: 24px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 290px;
+    text-align: center;
+
+}
+
+.image p {
+    margin-top: 18px;
+}
+
+a {
+    background-color: var(--blue-color);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 18px;
+    cursor: pointer;
+}
+
+a:hover {
+    background-color: var(--blue-hover-color);
+}
+
+@media (min-width: 800px) {
+    .image {
+        align-items: flex-start;
+        padding: 48px;
+        text-align: left;
+    }
+
+    h2 {
+        font-size: 38px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+}
