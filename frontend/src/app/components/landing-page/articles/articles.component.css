@@ -1,0 +1,42 @@
+img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+section {
+    margin: 12px;
+}
+
+h4 {
+    font-size: 22px;
+}
+
+.articles {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    margin-top: 12px;
+}
+
+article h2 {
+    font-size: 16px;
+}
+
+article p {
+    font-size: 14px;
+    color: var(--gray-dark-color);
+    margin-top: 4px;
+}
+
+@media (min-width: 380px) {
+    section {
+        margin: 12px 24px;
+    }
+}
+
+@media (min-width: 600px) {
+    section {
+        margin: 12px 0;
+    }
+}
