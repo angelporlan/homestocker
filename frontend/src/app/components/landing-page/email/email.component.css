@@ -24,8 +24,9 @@ input {
     border-radius: 4px;
     font-size: 16px;
     background-color: var(--gray-color);
-    outline: none;
+    /* outline: none; */
     color: var(--gray-dark-color);
+    margin-right: 12px;
 }
 
 
@@ -62,5 +63,11 @@ a:hover {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+}
+
+@media (max-width: 330px) {
+    input {
+        font-size: 14px;
     }
 }
