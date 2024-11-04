@@ -40,3 +40,16 @@ article p {
         margin: 12px 0;
     }
 }
+
+@media (max-width: 1000px) {
+    .articles {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 460px) {
+    .articles {
+        grid-template-columns: 1fr;
+    }
+}
+
