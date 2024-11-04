@@ -1,5 +1,5 @@
 .image {
-    background-color: rgb(173, 237, 173);
+    background-image: url('../../../../assets/images/landingpage1.jpg');
     padding: 24px 12px;
     display: flex;
     flex-direction: column;
@@ -8,6 +8,10 @@
     min-height: 290px;
     text-align: center;
     border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 400px;
 }
 
 .image p {
