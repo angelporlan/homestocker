@@ -2,13 +2,11 @@ footer {
     background-color: var(--blue-color);
     color: #fff;
     width: 100%;
-    border: 1px solid black
 }
 
 .footer_links {
     display: flex;
     justify-content: space-around;
-    border: 1px solid red;
     padding: 12px 0;
 }
 
@@ -29,10 +27,22 @@ img {
 .footer_social {
     display: flex;
     justify-content: center;
-    border: 1px solid green;
     padding: 12px 0;
 }
 
 .instagram {
     margin: 0 12px;
+}
+
+p {
+    text-align: center;
+    padding-bottom: 24px;
+}
+
+@media (max-width: 430px) {
+    .footer_links {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
