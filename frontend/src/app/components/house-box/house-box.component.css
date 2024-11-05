@@ -32,35 +32,3 @@ img {
 .house-info p {
     color: var(--gray-dark-color);
 }
-
-@media (min-width: 600px) {
-    .house {
-        margin: 0 24px 24px 24px;
-    }
-}
-
-@media (min-width: 800px) {
-    .house {
-        margin: 0;
-        flex-direction: column;
-        padding: 24px;
-    }
-
-    .house-image {
-        width: 100%;
-    }
-
-    img {
-        width: 100%;
-        height: auto;
-    }
-
-    .house-info {
-        margin: 12px;
-        width: 100%;
-    }
-
-    h2 {
-        width: 100%;
-    }
-}

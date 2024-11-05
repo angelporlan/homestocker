@@ -1,32 +1,31 @@
-@media (min-width: 800px) {
+.h2-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px;
+    margin-bottom: 36px;
+}
+
+button {
+    background-color: var(--blue-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--blue-hover-color);
+}
+
+@media (max-width: 330px) {
     .h2-button {
-        margin: 24px 72px 0 72px;
-        display: flex;
+        flex-direction: column;
     }
 
     button {
-        margin-left: 24px;
-        padding: 12px 24px;
-        border-radius: 10px;
-        border: none;
-        background-color: var(--blue-color);
-        color: #fff;
-        cursor: pointer;
-        margin-left: auto;
-    }
-
-    button:hover {
-        background-color: var(--blue-hover-color);
-    }
-
-    h2 {
-        font-size: 32px;
-    }
-
-    .houses {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 24px;
-        margin: 48px;
+        margin-top: 12px;
+        width: 100%;
     }
 }
