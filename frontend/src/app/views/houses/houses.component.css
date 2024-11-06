@@ -29,3 +29,14 @@ button:hover {
         width: 100%;
     }
 }
+
+@media (min-width: 600px) {
+    .houses {
+        margin-inline: 48px;
+    }
+
+    .h2-button {
+        margin-inline: 58px;
+    }
+}
+
