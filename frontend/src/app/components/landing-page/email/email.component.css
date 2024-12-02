@@ -24,7 +24,7 @@ input {
     border-radius: 4px;
     font-size: 16px;
     background-color: var(--gray-color);
-    /* outline: none; */
+    outline: none;
     color: var(--gray-dark-color);
     margin-right: 12px;
 }
